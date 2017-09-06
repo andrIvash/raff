@@ -1,10 +1,10 @@
-# Diary
+# Raff
 
 
 [Demo][demo] | [Source][source]
 
-[demo]: https://andrivash.github.io/diary01/
-[source]: https://github.com/andrIvash/diary01/tree/source
+[demo]: https://andrivash.github.io/raff/
+[source]: https://github.com/andrIvash/raff/tree/source
 
 
 ## Getting started for dev
