@@ -4,7 +4,7 @@
 [Demo][demo] | [Source][source]
 
 [demo]: https://andrivash.github.io/raff/
-[source]: https://github.com/andrIvash/raff/tree/source
+[source]: https://github.com/andrIvash/raff/
 
 
 ## Getting started for dev
