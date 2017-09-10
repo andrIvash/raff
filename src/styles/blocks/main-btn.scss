@@ -1,0 +1,25 @@
+.main-btn {
+  display: inline-block;
+  width: 165px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #fbef48;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  font-family: "ralewaybold";
+  font-size: 12px;
+  color: #000;
+
+  &:hover {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.14);
+  }
+
+  @include desktop() {
+    width: 130px;
+  }
+
+  @include laptop() {
+
+  }
+}

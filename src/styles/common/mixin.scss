@@ -1,3 +1,11 @@
+@mixin url($file) {
+  background-image: url('http://localhost:3000/assets/img/' + $file);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
 // clearfix
 @mixin clearfix {
   &:before,
@@ -69,20 +77,27 @@
 // media
 
 @mixin wide() {
-  @media screen and (min-width: 1601px) {
+  @media screen and (min-width: 1440px) {
     @content;
   }
 }
 @mixin desktop() {
-  @media screen and (max-width: 1600px) {
+  @media screen and (max-width: 1440px) {
     @content;
   }
 }
 @mixin laptop() {
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1240px) {
     @content;
   }
 }
+
+@mixin minilaptop() {
+  @media screen and (max-width: 1000px) {
+    @content;
+  }
+}
+
 @mixin tablet() {
   @media screen and (max-width: 768px) {
     @content;

@@ -1,0 +1,18 @@
+.sign {
+ 
+}
+
+.sign__diary {
+  width: 27px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.sign__link {
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+}

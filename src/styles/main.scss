@@ -11,9 +11,10 @@ body {
   min-height: 100vh;
   //min-width: 320px;
   width: 100%;
-  min-width: 1300px;
-  background-color:green;
+  min-width: 320px;
   position: relative;
+  overflow: hidden;
+
 }
 
 .container {
@@ -29,6 +30,13 @@ body {
 }
 
 
-
-
+@import 'blocks/header';
+@import 'blocks/logo';
+@import 'blocks/top-menu';
+@import 'blocks/main-btn';
+@import 'blocks/top-menu';
+@import 'blocks/user';
+@import 'blocks/sign';
 @import 'blocks/content';
+@import 'blocks/hero';
+@import 'blocks/card';

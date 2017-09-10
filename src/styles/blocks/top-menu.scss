@@ -1,0 +1,148 @@
+.top-menu {
+  position: relative;
+
+  @include minilaptop() {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 270px;
+    min-height: 100vh;
+    display: none;
+    padding: 10px 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+  }
+}
+
+.top-menu__btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  text-decoration: none;
+  height: 20px;
+  width: 20px;
+  display: none;
+
+  &:active,
+  &:hover {
+    text-decoration: none;
+  }
+
+  svg {
+    fill: #000;
+  }
+
+  &:hover svg {
+    fill: #fbef48;
+  }
+
+  @include minilaptop() {
+    display: block;
+  }
+}
+
+.top-menu__list {
+  justify-content: flex-end;
+  display: flex;
+  padding: 0;
+  list-style: none;
+
+  @include minilaptop() {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    width: 250px;
+  }
+}
+
+.top-menu__item {
+  margin-left: 10px;
+  min-width: 190px;
+  text-align: center;
+
+  &:first-child {
+    min-width: 94px;
+    margin-left: 0;
+  }
+
+  &:nth-child(2) {
+    min-width: 140px;
+  }
+
+  &:last-child {
+    min-width: 192px;
+  }
+
+  @include laptop() {
+    margin-left: 0;
+  }
+
+  @include minilaptop() {
+    margin-bottom: 10px;
+    text-align: left;
+  }
+}
+
+.top-menu__item.active {
+  font-family: "ralewayextrabold";
+}
+
+.top-menu__link {
+  font-family: "ralewaysemibold";
+  font-size: 14px;
+  text-decoration: none;
+  color: #000;
+
+  &:active,
+  &:hover {
+    text-decoration: none;
+    font-family: "ralewayextrabold";
+  }
+
+  @include minilaptop() {
+    font-size: 20px;
+  }
+}
+
+.top-menu__user {
+  display: none;
+
+  @include minilaptop() {
+    display: block;
+
+    .user {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .user__foto,
+    .user__content {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.top-menu__main-btn {
+  display: none;
+
+  @include phone() {
+    display: block;
+    margin-bottom: 30px;
+    text-align: center;
+
+    .main-btn {
+      width: 200px;
+    }
+  }
+}
+
+.top-menu__logo {
+  display: none;
+
+  @include minilaptop() {
+    display: block;
+    margin-bottom: 20px;
+  }
+}

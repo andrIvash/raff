@@ -1,0 +1,103 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  min-height: 60px;
+  padding: 0 5px 0 358px;
+  background-color: #fff;
+
+  @include desktop() {
+    padding: 0 5px 0 285px;
+  }
+
+  @include laptop() {
+    min-height: 50px;
+    padding: 0 5px;
+  }
+
+  .top-menu {
+    flex: 1 1 auto;
+    margin: 0 20px;
+
+    @include desktop() {
+      margin: 0 10px;
+    }
+
+    @include laptop() {
+      margin: 0 5px;
+    }
+    
+    @include minilaptop() {
+      margin: 0;
+    }
+  }
+
+  .header__btn {
+    margin: 0 30px;
+
+    @include desktop() {
+      margin: 0 10px;
+    }
+
+    @include minilaptop() {
+      margin: 0;
+      flex: 1 1 auto;
+      text-align: right;
+    }
+
+    @include phone() {
+      display: none;
+    }
+  }
+
+  .user {
+    margin: 0 30px;
+
+    @include desktop() {
+      margin: 0 20px;
+    }
+
+    @include laptop() {
+      margin: 0 10px;
+    }
+
+  }
+
+  .logo {
+    @include phone() {
+      max-width: 100%;
+    }
+  }
+
+  .sign_diary {
+    @include laptop() {
+      margin-left: 20px;
+    }
+  }
+}
+
+.header__menu-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 28px;
+  height: 21px;
+
+  @include minilaptop() {
+    position: relative;
+    display: block;
+  }
+
+  .header__menu__svg {
+    stroke: #000;
+    width: 25px;
+    height: 21px;
+    stroke-width: 1px;
+
+    &:hover {
+      stroke-width: 2px;
+    }
+  }
+}

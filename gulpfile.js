@@ -90,12 +90,13 @@ gulp.task('copy.fonts', function() {
 
 // ---------------------------------------- watch ---------------------------------------//
 gulp.task('watch', function() {
-  gulp.watch('./src/scripts/**/*.js', gulp.series('webpack')).on('change', browserSync.reload);
+  gulp.watch('./src/scripts/**/*.js', gulp.series('webpack'));
   gulp.watch('./src/styles/**/*.scss', gulp.series('css'));
-  gulp.watch('./src/templates/**/*.pug', gulp.series('pug')).on('change', browserSync.reload);
+  gulp.watch('./src/templates/**/*.pug', gulp.series('pug'));
+  gulp.watch('./build/*.html').on('change', browserSync.reload);
+  gulp.watch('./build/**/*.js').on('change', browserSync.reload);
 });
 
-gulp.watch('app/*.html').on('change', browserSync.reload);
 
 // ---------------------------------------- server ---------------------------------------//
 gulp.task('serve', function() {
@@ -107,7 +108,7 @@ gulp.task('serve', function() {
 
   });
 
-  // browserSync.watch(['./build' + '/**/*.*', '!**/*.css'], browserSync.reload);
+  //browserSync.watch(['./build' + '/**/*.*', '!./**/*.css'], browserSync.reload);
 });
 
 // ----------------------------------- css vendor -------------------------------------//

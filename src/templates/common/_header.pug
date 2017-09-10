@@ -1,0 +1,10 @@
+header.header
+  a.header__menu-btn(href="/" v-on:click="onShowMenu")
+    svg.header__menu__svg
+      use(xlink:href=`${data.cdn}img/sprite/sprite.svg#menu`)
+  include _logo
+  include _top-menu
+  .header__btn
+    include _main-btn 
+  include _user
+  include _sign

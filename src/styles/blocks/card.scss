@@ -1,0 +1,169 @@
+.cards {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  @include minilaptop() {
+    justify-content: center;
+  }
+}
+
+.cards__item {
+  margin: 0 15px 30px;
+}
+
+.card {
+  width: 385px;
+  min-height: 400px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.22);
+  }
+
+  @include tablet() {
+    justify-content: center;
+    width: 300px;
+  }
+}
+
+.card__shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.20);
+  display: none;
+  z-index: 2;
+}
+
+.card__img-wrap {
+  width: 385px;
+  height: 210px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.card__img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card__sign {
+  position: absolute;
+  top: 40px;
+  left: -3px;
+  overflow: hidden;
+  width: 125px;
+  height: 60px;
+
+  @include url('csign.svg');
+}
+
+.card__sign-text {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-family: ralewayextrabold;
+  font-size: 16px;
+}
+
+.card__title {
+  font-family: ralewaysemibold;
+  font-size: 16px;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.card__text {
+  font-family: ralewayregular;
+  font-size: 16px;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.card__footer {
+  flex: 1;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.card__footer-elem {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  font-family: robotoregular;
+  font-size: 12px;
+  color: #c0c0c0;
+}
+
+.card__info {
+  display: none;
+  margin-left: 0;
+  justify-content: center;
+  width: 100%;
+}
+
+.card__spend {
+  flex: 2 1 auto;
+  justify-content: center;
+}
+
+.card__icon {
+  width: 20px;
+  height: 15px;
+  margin-left: 5px;
+  fill: #c0c0c0;
+
+  &:hover {
+    fill: #747272;
+    cursor: pointer;
+  }
+}
+
+.card.offline {
+  .card__footer-elem {
+    display: none;
+  }
+
+  .card__info {
+    display: flex;
+  }
+
+  .card__shadow {
+    display: block;
+  }
+}
+
+.promo {
+  max-width: 794px;
+  max-height: 400px;
+
+  .promo__img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @include tablet {
+    max-width: 620px;
+    max-height: 312px;
+  }
+
+  @include phone {
+    max-width: 300px;
+    max-height: 151px;
+  }
+}
+

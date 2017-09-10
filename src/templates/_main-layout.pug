@@ -2,5 +2,9 @@ doctype html
 html
     include common/_head
     body
-      .wrapper
-        block content
+      #app
+        .wrapper(v-show="loading" v-bind:class="{visuallyHidden: !loading}")
+          block header
+            include common/_header
+            
+          block main
