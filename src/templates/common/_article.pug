@@ -1,0 +1,122 @@
+script(type="text/x-template" id="article-template")
+  main.main.main_article(v-show="isShown")     
+    .hero
+      .container
+        .hero__title
+          h1.hero__text Финансовая грамотность
+          .hero__sign
+            svg.hero__svg(viewBox="0 0 200 100" preserveAspectRatio="none")
+              polygon(points="0,0 0,200 200,0")
+            .hero__sign-text для родителей
+    .main__content
+      .container
+        .section.article
+          a.article__btn(href="/") Ко всем статьям
+            svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowl`)
+          h1.article__title 8pt Grid for Web. Или мой Калькулятор.
+          .article__time 14.08.2017
+          .article__content
+            p.article__text Наверняка вы уже слышали о сетке 8pt Grid, если ещё нет, то самое время это сделать, так как она может упростить жизнь вам и вашим разработчикам. Стало довольно распространенным строить сетки с кратностью равной 8. В этой статье я расскажу о своей методике и поделюсь нужными инструментами в конце статьи
+            h2.article__subtitle Очевидные плюсы:
+            p.article__text Поговорим о том, что же такого хорошего в этой сетке, жили ведь как-то и без неё. Вот, что она даёт:
+            ul.article__list
+              li.article__item Оптимизирует работу дизайнеров;
+                svg
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+              li.article__item Упрощает взаимодействие дизайнеров с разработчиками;
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+              li.article__item Сетка, элементы, поля, отступы - все они кратны 8.
+                svg
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+            p.article__text
+              span.article__label Для дизайнеров:
+              |Эффективность, меньше принимаемых решений по размерам элементов, отступам, которые задают качественный вертикальный, горизонтальный ритмы между элементами.
+            p.article__text  
+              span.article__label Для команды:
+              |Упрощение системы коммуникации между дизайнерами и разработчиками (никто не ссорится из-за пикселей). Разработчик легко может отслеживать размеры и отступы, даже на глаз, вместо того, чтобы проводить измерения каждый раз.
+            p.article__text
+              span.article__label Для пользователей:
+              |Подсознательно ощущают эстетику макета, отсутствуют полупиксели на используемых ими устройствах.
+            .article__img-wrap
+              img.article__img.artile__img_one(src=`${data.cdn}/img/rec1.jpg`)
+            h2.article__subtitle Проблема:
+            p.article__text Если посмотреть на статьи выше, то можно выделить два подхода того, как используют 8pt Grid
+            ul.article__list
+              li.article__item Оптимизирует работу дизайнеров;
+                svg
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)  
+              li.article__item Упрощает взаимодействие дизайнеров с разработчиками;
+                svg
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+              li.article__item Сетка, элементы, поля, отступы - все они кратны 8.
+                svg
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+            .article__img-wrap
+              img.article__img.artile__img_two(src=`${data.cdn}/img/rec2.jpg`)
+            p.article__text Наверняка вы уже слышали о сетке 8pt Grid, если ещё нет, то самое время это сделать, так как она может упростить жизнь вам и вашим разработчикам. Стало довольно распространенным строить сетки с кратностью равной 8. В этой статье я расскажу о своей методике и поделюсь нужными инструментами в конце статьи  
+            p.artice__quote Наверняка вы уже слышали о сетке 8pt Grid, если ещё нет, то самое время это сделать, так как она может упростить жизнь вам и вашим разработчикам. Стало довольно распространенным строить сетки с кратностью равной 8. В этой статье я расскажу о своей методике и поделюсь нужными инструментами в конце статьи
+          .article__socials.socials
+            .socials__left
+              .socials__show
+                span.socials__show-value 120
+                svg.socials__show-icon
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#eye`)
+              .socials__like
+                span.socials__like-value 5
+                svg.socials__like-icon
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)
+            .socials__right
+              ul.socials__list
+                li.socials__item
+                  a.socials__link.socials__link_vk(href="/")
+                    svg.socials__icon
+                      use(xlink:href=`${data.cdn}img/sprite/sprite.svg#vk`)
+                li.socials__item
+                  a.socials__link.socials__link_vk(href="/")
+                    svg.socials__icon
+                      use(xlink:href=`${data.cdn}img/sprite/sprite.svg#fb`)
+                li.socials__item
+                  a.socials__link.socials__link_vk(href="/")
+                    svg.socials__icon
+                      use(xlink:href=`${data.cdn}img/sprite/sprite.svg#tw`)
+                li.socials__item
+                  a.socials__link.socials__link_vk(href="/")
+                    svg.socials__icon
+                      use(xlink:href=`${data.cdn}img/sprite/sprite.svg#ok`)                  
+          form.article__form(v-show="!isCommented")
+            .article__form-item  
+              .artice__form-text  Вспомните, когда вы впервые почувствовали себя финансово независимым: может, это была стипендия или первая зарплата? На что вы потратили эти деньги?
+                span Присылайте рассказ о первом опыте покупки на собственные деньги!
+            .article__form-item 
+              textarea(name="articletext").article__form-textarea
+            .article__form-item 
+              button.article__form-btn(type="submit") Отправить
+
+          .article__story(v-show="isCommented") Благодарим за ваш рассказ! Ниже вы можете ознакомиться с историями других участников.   
+          .comments(v-show="isCommented")
+            ul.comments__list
+              li.comments__item
+                .comment
+                  .comment__foto
+                    img.comment__img(src=`${data.cdn}/img/userpic.png` title="user")
+                  .comment__content
+                    h3.comment__title Константин Константинопольский
+                    p.comment__text Наверняка вы уже слышали о сетке 8pt Grid, если ещё нет, то самое время это сделать, так как она может упростить жизнь вам и вашим разработчикам. Стало довольно распространенным строить сетки с кратностью равной 8. В этой статье я расскажу о своей методике и поделюсь нужными инструментами в конце статьи
+                  .comment__like
+                    span.comment__like-value 5
+                    svg.comment__like-icon
+                      use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)
+              li.comments__item
+                .comment
+                  .comment__foto
+                    img.comment__img(src=`${data.cdn}/img/userpic.png` title="user")
+                  .comment__content
+                    h3.comment__title Константин Константинопольский
+                    p.comment__text Наверняка вы уже слышали о сетке 8pt Grid, если ещё нет, то самое время это сделать, так как она может упростить жизнь вам и вашим разработчикам. Стало довольно распространенным строить сетки с кратностью равной 8. В этой статье я расскажу о своей методике и поделюсь нужными инструментами в конце статьи
+                  .comment__like
+                    span.comment__like-value 5
+                    svg.comment__like-icon
+                      use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)        
+            a.comments__btn(href="/") Загрузить еще

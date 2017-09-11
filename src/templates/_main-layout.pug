@@ -8,3 +8,7 @@ html
             include common/_header
             
           block main
+          .arrow-up#back-top
+            a.arrow-up__link(href='/' v-on:click="onBackTop") Наверх
+              svg
+                use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowu`)

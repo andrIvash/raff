@@ -1,0 +1,90 @@
+.socials {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.socials__left,
+.socials__right {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.socials__left {
+  justify-content: flex-start;
+}
+
+.socials__right {
+  justify-content: flex-end;
+}
+
+.socials__show,
+.socials__like {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.socials__show-value,
+.socials__like-value {
+  font-family: robotoregular;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.socials__show-icon {
+  width: 25px;
+  height: 17px;
+  fill: #3d4054;
+}
+
+.socials__like-icon {
+  width: 31px;
+  height: 28px;
+  stroke: #3d4054;
+  stroke-width: 2px;
+  fill: #fff;
+
+  .socials__like-icon.active,
+  &:hover {
+    stroke-width: 0;
+    fill: #ff1c5b;
+    cursor: pointer;
+  }
+}
+
+.socials__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.socials__item {
+  display: block;
+  margin: 0 5px;
+}
+
+.socials__link {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  background-color: #3d4054;
+  text-decoration: none;
+
+  &:active,
+  &:hover {
+    text-decoration: none;
+    background-color: #636ba2;
+  }
+}
+
+.socials__icon {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}

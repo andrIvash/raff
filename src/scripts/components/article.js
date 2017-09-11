@@ -1,19 +1,21 @@
 export default {
-  template: '#start-template',
+  template: '#article-template',
 
-  props: ['isShown'],
+  props: ['isShown', 'articleId'],
 
   data: function() {
     return {
-
+      isCommented: false
     };
   },
 
   mounted: function() {
-    console.log('start block !');
+    console.log('article block !');
   },
   methods: {
+
   },
+
   events: {
 
   }

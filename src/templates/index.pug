@@ -1,8 +1,10 @@
 extends _main-layout
 
 block main 
-    start-component
+    start-component(:is-shown="startShow")
+    article-component(:is-shown="articleShow", article-id="articleId")
     include common/_main
+    include common/_article
 
 
     
