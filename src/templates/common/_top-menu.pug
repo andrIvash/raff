@@ -4,12 +4,12 @@
       path(d="M356.781,305.982L601.453,61.311c14.033-14.033,14.033-36.771,0-50.774c-14.004-14.033-36.741-14.033-50.774,0L306.007,255.208L61.277,10.536c-14.004-14.033-36.771-14.033-50.774,0c-14.004,14.004-14.004,36.742,0,50.774l244.701,244.672L10.503,550.684c-14.004,14.004-14.004,36.771,0,50.774c7.016,7.017,16.216,10.51,25.387,10.51c9.2,0,18.371-3.493,25.387-10.51l244.701-244.701l244.671,244.701c7.017,7.017,16.217,10.51,25.388,10.51c9.199,0,18.399-3.493,25.387-10.51c14.033-14.033,14.033-36.771,0-50.774L356.781,305.982z")
   .top-menu__user
     include _user
-  ul.top-menu__list
-    li.top-menu__item
+  ul.top-menu__list(v-on:click="onSelectMenu")
+    li.top-menu__item(data-type="article")
       a.top-menu__link(href="/") Образование
-    li.top-menu__item
+    li.top-menu__item(data-type="list")
       a.top-menu__link(href="/") Рейтинг участников
-    li.top-menu__item
+    li.top-menu__item(data-type="getCard")
       a.top-menu__link(href="/") Детская карта Райффайзен
   .top-menu__main-btn
     include _main-btn

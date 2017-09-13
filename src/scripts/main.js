@@ -1,6 +1,9 @@
 import '../../node_modules/jquery-modal/jquery.modal.js';
 import Vue from '../../node_modules/vue/dist/vue.js';
 import 'owl.carousel';
+import { API } from './api';
+import { Cookie } from './cookie';
+import { Auth } from './auth';
 
 import StartComponent from './components/start';
 import ArticleComponent from './components/article';
@@ -12,13 +15,17 @@ const _vm = new Vue({
   el: '#app',
   data: {
     loading: false,
-    startShow: false,
+    startShow: true,
     articleShow: false,
     getCardShow: false,
     listShow: false,
-    gameShow: true,
+    gameShow: false,
     articleId: 0,
-    user: ''
+    user: {
+      firstName: '',
+      lastName: '',
+      photoSmall: ''
+    }
   },
 
   components: {
@@ -30,6 +37,7 @@ const _vm = new Vue({
   },
 
   mounted: function() {
+    console.log('Running App version ! ' + CDN);
     const that = this;
     const backTop = $('#back-top');
     backTop.hide();
@@ -40,33 +48,37 @@ const _vm = new Vue({
         backTop.fadeOut();
       }
     });
-    // this.loading = true; // инициализация спиннера
-    console.log('Running App version ! ' + CDN);
-    this.getData().then(function() {
-      that.loading = true;
-    }).catch(function() {
-      console.log('fail');
-    });
+      API.init();
+      if (void 0 !== Cookie.get('token')) {
+        API.token = Cookie.get('token');
+        this.startApp();
+      } else if (document.location.search.indexOf('auth') === -1) {
+        Auth.auth();
+      }
+
+    
   },
   events: {},
   methods: {
-    getData: function() {
-      console.log('get data');
-      // var that = this;
-      // return $.ajax({
-      //   url: '/teachers/getCourseTeachers/' + courseId,
-      //   method: "GET",
-      //   success: function(res) {
-      //     that.teachers = res;
-      //   }
-      // });
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          console.log('getted');
-          resolve();
-        }, 2000);
+    startApp: function() {
+      const that = this;
+      API.getUserInfo().then((res) => {
+        that.loading = true; // инициализация спиннера
+        const roles = API.getData().user.roles;
+        that.user = res;
+        console.log(that.user);
+        const isParent = roles.find(role => {
+          return role === 'EduParent';
+        });
+        that.clearView();
+        if (!isParent) { // проверка на родителя
+          that.gameShow = true;
+        } else {
+          that.startShow = true;
+        }
       });
     },
+
     onShowMenu(even) {
       event.preventDefault();
       $('.top-menu').toggle('fast');
@@ -78,6 +90,20 @@ const _vm = new Vue({
         scrollTop: 0
       }, 800);
       return false;
+    },
+    onSelectMenu(ev) {
+      ev.preventDefault();
+      const type = $(ev.target).closest('.top-menu__item').data('type');
+      this.clearView();
+      this[`${type}Show`] = true;
+    },
+
+    clearView() {
+      this.startShow = false;
+      this.articleShow = false;
+      this.getCardShow = false;
+      this.listShow = false;
+      this.gameShow = false;
     }
   }
 });
