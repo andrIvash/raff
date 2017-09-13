@@ -1,5 +1,5 @@
 @mixin url($file) {
-  background-image: url('http://localhost:3000/assets/img/' + $file);
+  background-image: url('assets/img/' + $file);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
