@@ -1,8 +1,9 @@
 .top-menu {
   position: relative;
+  z-index: 999;
 
   @include minilaptop() {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     max-width: 270px;
@@ -144,5 +145,6 @@
   @include minilaptop() {
     display: block;
     margin-bottom: 20px;
+    margin-top: 64%;
   }
 }

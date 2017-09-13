@@ -5,6 +5,8 @@ import 'owl.carousel';
 import StartComponent from './components/start';
 import ArticleComponent from './components/article';
 import GetCardComponent from './components/getCard';
+import ListComponent from './components/list';
+import GameComponent from './components/game';
 
 const _vm = new Vue({
   el: '#app',
@@ -12,7 +14,9 @@ const _vm = new Vue({
     loading: false,
     startShow: false,
     articleShow: false,
-    getCardShow: true,
+    getCardShow: false,
+    listShow: true,
+    gameShow: false,
     articleId: 0,
     user: ''
   },
@@ -20,7 +24,9 @@ const _vm = new Vue({
   components: {
     startComponent: StartComponent,
     articleComponent: ArticleComponent,
-    getCardComponent: GetCardComponent
+    getCardComponent: GetCardComponent,
+    listComponent: ListComponent,
+    gameComponent: GameComponent
   },
 
   mounted: function() {

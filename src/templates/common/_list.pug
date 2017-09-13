@@ -1,0 +1,36 @@
+script(type="text/x-template" id="list-template")
+  main.main.main_list(v-show="isShown")     
+    .main__content
+      .container
+        .section.main-list
+          a.mainlist__btn(href="/") К игре
+            svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowl`)
+          .main-list__inner
+            .main-list__header
+              .score.score_title
+                .score__number Место
+                .score__name Участник
+                .score__value Баллы
+            ul.main-list__list
+              li.main-list__item
+                .score
+                  .score__number 1
+                  .score__info
+                    .score__foto
+                      img.score__img(src=`${data.cdn}/img/userpic.png` title="user")
+                    .score__data  
+                      .score__name Константин Константинопольский
+                      .score__city Москва
+                  .score__value 5
+              li.main-list__item
+                .score
+                  .score__number 2
+                  .score__info
+                    .score__foto
+                      img.score__img(src=`${data.cdn}/img/userpic.png` title="user")
+                    .score__data  
+                      .score__name Константин Константинопольский
+                      .score__city Москва
+                  .score__value 5    
+            
