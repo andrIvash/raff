@@ -15,8 +15,8 @@ const _vm = new Vue({
     startShow: false,
     articleShow: false,
     getCardShow: false,
-    listShow: true,
-    gameShow: false,
+    listShow: false,
+    gameShow: true,
     articleId: 0,
     user: ''
   },

@@ -1,5 +1,121 @@
 .main_game {
+  background-color: #c3e2f2;
+  margin-bottom: -57px;
+  overflow: hidden;
+
   .container {
     max-width: 800px;
   }
+
+  .main__content {
+    max-width: 100%;
+    height: 100vh;
+    background-image: url(http://localhost:3000/assets/img/gamefon.svg);
+    background-position: 100% bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.gamedock {
+  width: 100%;
+  height: 150px;
+  background-color: #747474;
+  position: relative;
+  top: -57px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.gamedock__list {
+  display: flex;
+}
+
+.gamedock__item {
+  width: 170px;
+  height: 70px;
+  background-color: #50546b;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  border-left: 1px solid #1f223a;
+
+  &:first-child {
+    border-left: 0;
+    background-color: #3d4054;
+  }
+}
+
+.gamedock__title {
+  font-family: ralewaysemibold;
+  font-size: 12;
+  margin-bottom: 10px;
+  color: #fff;
+  margin-left: 30px;
+}
+
+.gamedock__value {
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #fff;
+  position: relative;
+  height: 10px;
+  width: 121px;
+  margin-left: 30px;
+}
+
+.gamedock__val {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 65%;
+  background-color: #36cf30;
+}
+
+.gamedock__info {
+  align-items: center;
+
+  .gamedock__title {
+    font-size: 14px;
+    margin-left: 0;
+  }
+
+  .gamedock__money {
+    font-family: robotobold;
+    font-size: 18px;
+    color: #fff;
+  }
+}
+
+.human {
+  width: 270px;
+  height: 540px;
+  position: absolute;
+  bottom: 0;
+  left: 150px;
+  z-index: 999;
+
+  @include url('nerd1.svg');
+} 
+
+.talk {
+  width: 247px;
+  height: 205px;
+  position: absolute;
+  top: -150;
+  left: 300px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; 
+  font-family: ralewaybold;
+  font-size: 30px;
+
+  @include url('shout.svg');
 }

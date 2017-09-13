@@ -1,5 +1,24 @@
 script(type="text/x-template" id="game-template")
   main.main.main_game(v-show="isShown")     
     .main__content
-      .container
-          
+      
+    .gamedock
+        .gamedock__list
+          .gamedock__item.gamedock__info
+            .gamedock__title На карте
+            .gamedock__money 8365
+          .gamedock__item.gamedock__mood
+            .gamedock__title Настроение
+            .gamedock__value
+              .gamedock__val
+          .gamedock__item.gamedock__health
+            .gamedock__title Здоровье
+            .gamedock__value
+              .gamedock__val
+          .gamedock__item.gamedock__food
+            .gamedock__title Еда
+            .gamedock__value
+              .gamedock__val
+    .human 
+      .talk
+        span ПРИВЕТ!   
