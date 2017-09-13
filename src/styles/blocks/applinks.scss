@@ -1,0 +1,77 @@
+.applinks {
+  margin: 60px 10px 40px;
+  min-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include tablet {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.applinks__btn {
+  width: 262px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  background-color: #fbef48;
+  justify-content: center;
+  font-family: ralewaybold;
+  font-size: 20px;
+  color: #250e0e;
+
+  &:hover,
+  &:active {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.24);
+  }
+
+  @include minilaptop {
+    width: 262px;
+    height: 60px;
+    margin-bottom: 30px;
+  }
+
+  @include phone {
+    width: 240px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+.applinks__items {
+  width: 260px;
+  height: 36px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.applink__link {
+  text-decoration: none;
+  display: block;
+  border-radius: 4px;
+  margin: 0 10px;
+
+  &:active,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.applink__link_i {
+  width: 125px;
+  height: 36px;
+
+  @include url('mac.png');
+}
+
+.applink__link_a {
+  width: 110px;
+  height: 36px;
+
+  @include url('google.png');
+}

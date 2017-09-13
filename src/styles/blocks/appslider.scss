@@ -1,0 +1,93 @@
+.appslider-wrap {
+  max-width: 1100px;
+  width: 100%;
+  padding: 40px 0;
+  margin: auto;
+  background-color: #f3f3f4;
+}
+
+.appslider {
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+
+
+  @include phone() {
+    .appslider__item {
+      width: 210px;
+      margin: 0 auto;
+    }
+  }
+
+  .owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .owl-prev {
+    display: block;
+    width: 94px;
+    height: 94px;
+    font-size: 0;
+
+    @include url('arrowl.png');
+
+    &:hover {
+      @include url('arrowlh.png');
+    }
+
+    @include tablet {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  .owl-next {
+    font-size: 0;
+    display: block;
+    width: 94px;
+    height: 94px;
+
+    @include url('arrowr.png');
+
+    &:hover {
+      @include url('arrowrh.png');
+    }
+    
+    @include tablet {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  .owl-dots {
+    position: absolute;
+    top: -23px;
+    width: 100%;
+    justify-content: center;
+    display: none;
+
+    @include phone {
+      display: flex;
+    }
+
+    .owl-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.27);
+      margin: 0 5px;
+
+      &.active {
+        background: rgba(0, 0, 0, 0.67);
+      }
+    }
+
+  }
+}
+

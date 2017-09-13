@@ -1,22 +1,26 @@
 import '../../node_modules/jquery-modal/jquery.modal.js';
 import Vue from '../../node_modules/vue/dist/vue.js';
+import 'owl.carousel';
 
 import StartComponent from './components/start';
 import ArticleComponent from './components/article';
+import GetCardComponent from './components/getCard';
 
 const _vm = new Vue({
   el: '#app',
   data: {
     loading: false,
     startShow: false,
-    articleShow: true,
+    articleShow: false,
+    getCardShow: true,
     articleId: 0,
     user: ''
   },
 
   components: {
     startComponent: StartComponent,
-    articleComponent: ArticleComponent
+    articleComponent: ArticleComponent,
+    getCardComponent: GetCardComponent
   },
 
   mounted: function() {

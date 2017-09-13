@@ -108,17 +108,18 @@ gulp.task('serve', function() {
 
   });
 
-  //browserSync.watch(['./build' + '/**/*.*', '!./**/*.css'], browserSync.reload);
+  // browserSync.watch(['./build' + '/**/*.*', '!./**/*.css'], browserSync.reload);
 });
 
 // ----------------------------------- css vendor -------------------------------------//
 gulp.task('css.vendor', function() {
   return gulp.src([
-    './node_modules/normalize.css/normalize.css'
+    './node_modules/normalize.css/normalize.css',
+    './node_modules/owl.carousel/dist/assets/owl.carousel.min.css'
   ])
     .pipe(concatCss('vendor.css'))
     .pipe(csso())
-    .pipe(gulp.dest('./build/assets/styles'))
+    .pipe(gulp.dest('./build/assets/styles'));
 });
 
 // ---------------------------------------- clean ---------------------------------------//
@@ -189,7 +190,7 @@ gulp.task('sprite:png', function() {
   var spriteData = gulp.src('./src/images/png-sprites/*.png')
     .pipe(spritesmith({
       imgName: 'sprite.png',
-      cssName: 'sprite.scss',
+      cssName: 'sprite-png.scss',
       cssFormat: 'scss',
       // retinaSrcFilter: ['images/png-sprites/*@2x.png'],
       // retinaImgName: 'sprite@2x.png',

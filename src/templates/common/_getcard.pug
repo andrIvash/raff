@@ -1,0 +1,89 @@
+script(type="text/x-template" id="getcard-template")
+  main.main.main_getcard(v-show="isShown")     
+    .hero
+      .container
+        .hero__title
+          h1.hero__text Детская карта Райффайзен Банк
+          .hero__sign
+            svg.hero__svg(viewBox="0 0 200 100" preserveAspectRatio="none")
+              polygon(points="0,0 0,200 200,0")
+            .hero__sign-text от 6 до 17 лет
+    .main__content
+      .promocard
+        .promocard__top
+          svg.promocard__top-svg(viewBox="0 0 400 50" preserveAspectRatio="none")
+              polygon(points="0,0 0,400 400,0")
+          .container
+            .promocard__title Чтобы попасть во взрослую жизнь, ребенку нужна карта!
+            .promocard__adv
+              .promocard__adv-wrap
+                img.promoacrd__adv-img(src=`${data.cdn}img/dog.png` title="card promo")    
+        .promocard__content
+          .container
+            .promocard__inner-text
+              .promocard__text С детской картой
+              h2.promocard__subtitle Ваш ребенок сможет:
+              ul.promocard__list
+                li.promocard__item 
+                  span Получать подарки от Банка и cashback 5% на все покупки
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+                li.promocard__item 
+                  span Бесплатно пополнять карту с карт любых банков
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+                li.promocard__item Расплачиваться картой самостоятельно
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+                li.promocard__item 
+                  span Обучаться финансовой грамотности, анализируя свои траты
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+              .promocard__text С детской картой
+              h2.promocard__subtitle Вы сможете:
+              ul.promocard__list
+                li.promocard__item 
+                  span Контролировать расходы ребёнка через SMS-оповещения  
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+                li.promocard__item 
+                    span Устанавливать ежедневные лимиты на снятие наличных и траты
+                    svg
+                      use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+                li.promocard__item 
+                  span Быть уверенным в безопасности
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)            
+              a.promocard__btn(href="/") Оформить карту
+        .promocard__mobile.mobile
+          .container
+            h2.mobile__title А ещё специально для молодых держателей карт разработано мобильное приложение «Райффайзен-Start», которое:
+            .mobile__content
+              .mobile__item Поможет найти ответы на вопросы, связанные с личными финансами
+                svg.mobile__svg.mobile__svg_quest
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#qwestions`)
+              .mobile__item Предоставляет возможность делать первые накопления и планировать будущие приобретения
+                svg.mobile__svg.mobile__svg_pig
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#pig`)
+              .mobile__item Дает информацию об остатке на счете 
+                svg.mobile__svg.mobile__svg_wallet
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#wallet`)    
+              .mobile__item Позволяет отслеживать расходы 
+                svg.mobile__svg.mpbile__svg_ccard
+                  use(xlink:href=`${data.cdn}img/sprite/sprite.svg#ccard`)
+        .appslider-wrap          
+          ul.appslider.owl-carousel.owl-theme(id="appslider")
+            li.appslider__item
+              img.appslider__img.appslider__img_01(src=`${data.cdn}img/01.jpg`)
+            li.appslider__item
+              img.appslider__img.appslider__img_02(src=`${data.cdn}img/02.jpg`)
+            li.appslider__item
+              img.appslider__img.appslider__img_03(src=`${data.cdn}img/03.jpg`)
+            li.appslider__item
+              img.appslider__img.appslider__img_04(src=`${data.cdn}img/04.jpg`)
+
+          .applinks
+            a.applinks__btn(href="/") Оформить карту
+            .applinks__items
+              a.applink__link.applink__link_i(href="/")
+              a.applink__link.applink__link_a(href="/")    
