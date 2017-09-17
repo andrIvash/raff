@@ -1,7 +1,12 @@
 @import 'common/mixin';
 @import 'common/fonts';
 @import 'common/sprite';
+@import 'common/sprite-png';
 
+
+* {
+  box-sizing: border-box;
+}
 body {
   position: relative;
 }

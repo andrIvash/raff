@@ -1,4 +1,6 @@
 import '../../node_modules/jquery-modal/jquery.modal.js';
+import './jquery.jscrollpane.min.js';
+import './jquery.mousewheel.js';
 import Vue from './vue.js';
 import 'owl.carousel';
 import { API } from './api';
@@ -71,7 +73,7 @@ const _vm = new Vue({
           return role === 'EduParent';
         });
         that.clearView();
-        if (!isParent) { // проверка на родителя
+        if (isParent) { // проверка на родителя
           that.gameShow = true;
         } else {
           that.startShow = true;

@@ -4,7 +4,8 @@ script(type="text/x-template" id="game-template")
       
     .gamedock
         .gamedock__list
-          .gamedock__item.gamedock__info
+          .gamedock__item.gamedock__info(v-on:click="onPanelShow")
+            .gamedock__triangle
             .gamedock__title На карте
             .gamedock__money 8365
           .gamedock__item.gamedock__mood
@@ -19,6 +20,36 @@ script(type="text/x-template" id="game-template")
             .gamedock__title Еда
             .gamedock__value
               .gamedock__val
+    .gamepanel
+      .gamepanel__close(v-on:click="onPanelClose")
+      .gamepanel__left
+        .gamepanel__card
+        .gamepanel__data
+          .gamepanel__sum Баланс: 
+            span 8400
+          .gamepanel__data Ближайшая з/п 15.08.17
+      .gamepanel__right
+        .gamepanel__wrapper
+          .gamepanel__title История операций
+          .gamepanel__date  Сегодня
+          ul.gamepanel__list
+            li.gamepanel__item.gamepanel_food
+              .gamepanel__item-title Поход в ресторан с друзьями          
+              .gamepanel__item-summ -1500
+          .gamepanel__date 15.07.2017
+          ul.gamepanel__list
+            li.gamepanel__item.gamepanel_health
+              .gamepanel__item-title Поход к врачу          
+              .gamepanel__item-summ -1500
+            li.gamepanel__item.gamepanel_smile
+              .gamepanel__item-title Новые кроссовки         
+              .gamepanel__item-summ -1000
+            li.gamepanel__item.gamepanel_health
+              .gamepanel__item-title Поход к врачу          
+              .gamepanel__item-summ -1500
+            li.gamepanel__item.gamepanel_smile
+              .gamepanel__item-title Новые кроссовки         
+              .gamepanel__item-summ -1000        
     .human 
       .talk
         span ПРИВЕТ!   

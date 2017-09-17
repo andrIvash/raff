@@ -28,7 +28,7 @@
   height: 20%;
   background-color: #747474;
   position: relative;
-  top: -57px;
+  top: -49px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -40,7 +40,7 @@
 
 .gamedock__item {
   width: 170px;
-  height: 70px;
+  height: 90px;
   background-color: #50546b;
   display: flex;
   justify-content: center;
@@ -83,6 +83,35 @@
 
 .gamedock__info {
   align-items: center;
+  width: 200px;
+  position: relative;
+  cursor: pointer;
+  background-color: #3d4054;
+
+  &::before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    width: 41px;
+    height: 48px;
+    z-index: 2;
+
+    @include sprite($s-wallet);
+  }
+
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 12px;
+    width: 10px;
+    height: 10px;
+
+    @include sprite($s-arrowu);
+  }
 
   .gamedock__title {
     font-size: 14px;
@@ -94,6 +123,16 @@
     font-size: 18px;
     color: #fff;
   }
+
+  .gamedock__triangle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 20px solid #747474;
+    border-right: 20px solid#3d4054;
+  }
 }
 
 .human {
@@ -102,7 +141,7 @@
   position: absolute;
   bottom: 0;
   left: 150px;
-  z-index: 999;
+  z-index: 100;
 
   @include url('nerd1.svg');
 } 
@@ -122,4 +161,167 @@
   font-size: 30px;
 
   @include url('shout.svg');
+}
+
+.gamepanel {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #3d4054;
+  width: 723px;
+  height: 0;
+  z-index: 299;
+  display: flex;
+  justify-content: space-between;
+  transition: height 1s ease;
+}
+
+.gamepanel.active {
+  height: 372px;
+}
+
+.gamepanel__close {
+  display: block;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  cursor: pointer;
+
+  @include sprite($s-cross);
+}
+
+.gamepanel__left {
+  padding: 20px;
+  border-right: 2px solid #1f223a;
+}
+.gamepanel__card {
+  width: 201px;
+  height: 127px;
+  margin-bottom: 20px;
+
+  @include url('dog.png');
+}
+
+.gamepanel__data {
+  font-family: robotoregular;
+  font-size: 18px;
+  color: #fff;
+}
+
+.gamepanel__sum {
+  margin-bottom: 10px;
+
+  span {
+    font-size: 22px;
+  }
+}
+
+.gamepanel__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60%; 
+  padding: 20px; 
+  font-family: ralewayregular;
+}
+
+.gamepanel__wrapper {
+  overflow-y: auto;
+  width: 100%;
+  margin-bottom: 35px;
+
+  .jspTrack {
+    background: #3d4054;
+  }
+
+  .jspDrag {
+    background: #71769e;
+    height: 40px !important;
+    border-radius: 5px;
+  }
+
+  .jspVerticalBar {
+    width: 8px;
+  }
+}
+
+.gamepanel__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.gamepanel__date {
+  background-color: #4e5169;
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  font-size: 12px;
+  font-family: robotoregular;
+  margin-bottom: 20px;
+}
+
+.gamepanel__list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.gamepanel__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px 0 40px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #fff;
+  position: relative;
+  height: 24px;
+  align-items: center;
+
+  &::before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.gamepanel__item-title {
+  font-family: ralewayregular;
+}
+
+.gamepanel__item-summ {
+  font-family: robotoregular;
+}
+
+.gamepanel_food {
+  &::before {
+    @include sprite($s-burger);
+  }
+}
+
+.gamepanel_health {
+  &::before {
+    @include sprite($s-health);
+  }
+}
+
+.gamepanel_smile {
+  &::before {
+    @include sprite($s-smile);
+  }
 }

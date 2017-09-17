@@ -115,7 +115,8 @@ gulp.task('serve', function() {
 gulp.task('css.vendor', function() {
   return gulp.src([
     './node_modules/normalize.css/normalize.css',
-    './node_modules/owl.carousel/dist/assets/owl.carousel.min.css'
+    './node_modules/owl.carousel/dist/assets/owl.carousel.min.css',
+    './src/styles/common/jquery.jscrollpane.css'
   ])
     .pipe(concatCss('vendor.css'))
     .pipe(csso())

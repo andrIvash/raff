@@ -13,7 +13,16 @@ export default {
     console.log('game block !');
   },
   methods: {
+    onPanelShow: function() {
+      $('.gamepanel').addClass('active');
+      setTimeout(function() {
+        $('.gamepanel__wrapper').jScrollPane();
+      }, 1500);
+    },
 
+    onPanelClose: function() {
+      $('.gamepanel').removeClass('active');
+    }
   },
 
   events: {
