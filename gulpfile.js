@@ -22,7 +22,7 @@ const imagemin = require('gulp-imagemin');
 const buffer = require('vinyl-buffer');
 const merge = require('merge-stream');
 const fs = require('fs');
-var uglify = require('gulp-uglifyjs');
+//var uglify = require('gulp-uglifyjs');
 // ---------------------------------------- webpack --------------------------//
 gulp.task('webpack', function() {
   
