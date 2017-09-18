@@ -5,7 +5,7 @@ block main
     article-component(:is-shown="articleShow", article-id="articleId", :info-data="info")
     get-card-component(:is-shown="getCardShow")
     list-component(:is-shown="listShow", :list-data="userList")
-    game-component(:is-shown="gameShow", :info-data="info")
+    game-component(:is-shown="gameShow", :info-data="info", :show-sc="showScenario")
     include common/_main
     include common/_article
     include common/_getcard

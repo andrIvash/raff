@@ -1,7 +1,7 @@
 export default {
   template: '#game-template',
 
-  props: ['isShown', 'infoData'],
+  props: ['isShown', 'infoData', 'showSc'],
 
   data: function() {
     return {
@@ -22,6 +22,21 @@ export default {
 
     onPanelClose: function() {
       $('.gamepanel').removeClass('active');
+    },
+
+    showModal: function() {
+      const modal = $('#modal').modal({
+        fadeDuration: 250,
+        fadeDelay: 1.5
+      });
+      $('.modal__btn_one').on('click', function(){
+        console.log('good');
+        $.modal.close();
+      })
+      $('.modal__btn_two').on('click', function(){
+        console.log('bad');
+        $.modal.close();
+      })   
     }
   },
   watch: {
@@ -30,6 +45,22 @@ export default {
       $('.gamedock__mood .gamedock__val').css('width', `${this.infoData.mood}%`);
       $('.gamedock__health .gamedock__val').css('width', `${this.infoData.health}%`);
       $('.gamedock__food .gamedock__val').css('width', `${this.infoData.food}%`);
+    },
+    showSc: function(newVal, oldVal) {
+      if (this.$parent.gameShow === true) {
+        $('.modal__content').text('Присмотрела себе классный гироскутер! Стоит немало. Хочу оплатить по кредитной карте*. Как поступить?');
+        $('.modal__btn_one').text('Накопить');
+        $('.modal__btn_two').text('Оплатить по кредитке');
+        this.showModal();
+      }
+    },
+    isShown: function(){
+      if (this.showSc === true) {
+        $('.modal__content').text('Присмотрела себе классный гироскутер! Стоит немало. Хочу оплатить по кредитной карте*. Как поступить?');
+        $('.modal__btn_one').text('Накопить');
+        $('.modal__btn_two').text('Оплатить по кредитке');
+        this.showModal();
+      }
     }
   },
   events: {

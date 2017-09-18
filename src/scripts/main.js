@@ -1,5 +1,6 @@
 //import moment from 'moment';
 import './jquery.jscrollpane.min.js';
+import '../../node_modules/jquery-modal/jquery.modal.js';
 import 'owl.carousel';
 import { API } from './api';
 import { Cookie } from './cookie';
@@ -32,9 +33,7 @@ const _vm = new Vue({
       summ: 0
     },
     userList: [],
-    temp: {
-      
-    }
+    showScenario: false
   },
 
   components: {
@@ -241,7 +240,6 @@ const _vm = new Vue({
         this.info.summ = this.info.summ + 100 * (lastDays % 7).toFixed();
       }
 
-
       const userIndx = this.userList.findIndex(elem => elem.id === this.user.id);
       if (userIndx !== -1) {
         this.userList[userIndx].summ = this.info.summ; // обновляем список баллов
@@ -265,6 +263,14 @@ const _vm = new Vue({
       
       this.info.nextPayment = this.getNexDay(1).locale('ru').format('ll'); // когда следующая зарплата
       console.log(this.getNexDay(1).isSame(moment(Date.now())));
+      
+      setTimeout(function() {
+        that.showScenario = true;
+      }, 4000);
+      
+      if (lastDays >= 3) {  // прибавляем зарплату раз в неделю
+        this.showScenario = true;
+      }
       
       console.log(this.info);
       console.log(this.userList);
