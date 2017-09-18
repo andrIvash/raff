@@ -142,9 +142,17 @@
   bottom: 0;
   left: 150px;
   z-index: 100;
-
-  @include url('nerd1.svg');
 } 
+
+.human.human_man {
+  @include url('man.svg');
+  background-size: contain;
+}
+
+.human.human_woman {
+  @include url('woman.svg');
+  background-size: contain;
+}
 
 .talk {
   width: 247px;

@@ -1,7 +1,7 @@
 export default {
   template: '#game-template',
 
-  props: ['isShown', 'infoData', 'showSc'],
+  props: ['isShown', 'infoData', 'showSc', 'userData'],
 
   data: function() {
     return {
@@ -29,14 +29,15 @@ export default {
         fadeDuration: 250,
         fadeDelay: 1.5
       });
-      $('.modal__btn_one').on('click', function(){
+      $('.modal__btn_one').on('click', function() {
         console.log('good');
         $.modal.close();
-      })
-      $('.modal__btn_two').on('click', function(){
+      });
+
+      $('.modal__btn_two').on('click', function() {
         console.log('bad');
         $.modal.close();
-      })   
+      });   
     }
   },
   watch: {
@@ -54,12 +55,20 @@ export default {
         this.showModal();
       }
     },
-    isShown: function(){
+    isShown: function() {
       if (this.showSc === true) {
         $('.modal__content').text('Присмотрела себе классный гироскутер! Стоит немало. Хочу оплатить по кредитной карте*. Как поступить?');
         $('.modal__btn_one').text('Накопить');
         $('.modal__btn_two').text('Оплатить по кредитке');
         this.showModal();
+      }
+    },
+    userData: function(newVal) {
+      const human = $('.human');
+      if (newVal.sex === 'Male') {
+        human.addClass('human_man');
+      } else {
+        human.addClass('human_woman');
       }
     }
   },
