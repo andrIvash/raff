@@ -27,7 +27,8 @@ script(type="text/x-template" id="game-template")
         .gamepanel__data
           .gamepanel__sum Баланс: 
             span(v-text="infoData.summ")
-          .gamepanel__data Ближайшая з/п 15.08.17
+          .gamepanel__data Ближайшая з/п
+            span(v-text="infoData.nextPayment")
       .gamepanel__right
         .gamepanel__wrapper
           .gamepanel__title История операций

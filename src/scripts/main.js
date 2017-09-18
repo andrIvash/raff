@@ -101,7 +101,7 @@ const _vm = new Vue({
       }).then(function() {
         API.getKeyFromDB({key: `raff_activity-${that.user.personId}`}, function(res) {
           console.log(res);
-          if (res !== null) { // new user
+          if (res === null) { // new user
             that.info = {
               lastvisit: Date.now(),
               firstvisit: Date.now(),
@@ -130,7 +130,9 @@ const _vm = new Vue({
               ],
               mood: 100,
               health: 100,
-              food: 100
+              food: 100,
+              nextPayment: '31/12/18'
+
             };
             that.userList.push({
               id: that.user.personId,
@@ -206,6 +208,17 @@ const _vm = new Vue({
       this.gameShow = false;
     },
 
+    getNexDay(dayNumber) { // получить дату следующего дня недели 4 for Thursday
+      // if we haven't yet passed the day of the week that I need:
+      if (moment().isoWeekday() <= dayNumber) {
+        // then just give me this week's instance of that day
+        return moment().isoWeekday(dayNumber).format('ll');
+      } else {
+        // otherwise, give me next week's instance of that day
+        return moment().add(1, 'weeks').isoWeekday(dayNumber).format('ll');
+      }
+    },
+
     updateData(res) {
       console.log(res);
       const that = this;
@@ -238,6 +251,11 @@ const _vm = new Vue({
       let moodLevel = this.info.mood - (diffLast % 3 * 34).toFixed(); // уменьшаем настроение
       this.info.food = moodLevel < 0 ? 0 : this.info.food;
 
+      var weekDayToFind = moment().day('Monday').weekday(); //change to searched day name
+      
+      this.info.nextPayment = this.getNexDay(1); // когда следующая зарплата
+      
+      
       console.log(this.info);
       console.log(this.userList);
       API.addKeyToDB({
