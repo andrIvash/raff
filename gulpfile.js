@@ -135,7 +135,7 @@ gulp.task('js.vendor', function() {
     './src/scripts/vue.js'
   ])
     .pipe(concatCss('vendor.js'))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('./build/assets/scripts'));
 });
 
