@@ -95,7 +95,8 @@
   color: #000;
 
   &:active,
-  &:hover {
+  &:hover,
+  &.active {
     text-decoration: none;
     font-family: "ralewayextrabold";
   }

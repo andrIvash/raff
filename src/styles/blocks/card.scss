@@ -24,6 +24,7 @@
   position: relative;
   border-radius: 5px;
   overflow: hidden;
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.22);
@@ -144,8 +145,15 @@
 }
 
 .promo {
+  display: block;
   max-width: 758px;
   max-height: 400px;
+  text-decoration: none;
+
+  &:active,
+  &:hover {
+    text-decoration: none;
+  }
 
   .promo__img {
     max-width: 100%;

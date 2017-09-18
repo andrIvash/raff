@@ -11,7 +11,7 @@ script(type="text/x-template" id="article-template")
     .main__content
       .container
         .section.article
-          a.article__btn(href="/") Ко всем статьям
+          a.article__btn(href="/", v-on:click="goBack") Ко всем статьям
             svg
               use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowl`)
           h1.article__title 8pt Grid for Web. Или мой Калькулятор.
@@ -85,7 +85,7 @@ script(type="text/x-template" id="article-template")
                   a.socials__link.socials__link_vk(href="/")
                     svg.socials__icon
                       use(xlink:href=`${data.cdn}img/sprite/sprite.svg#ok`)                  
-          form.article__form(v-show="!isCommented")
+          form.article__form(v-show="!isCommented", @submit.prevent="sendReview")
             .article__form-item  
               .artice__form-text  Вспомните, когда вы впервые почувствовали себя финансово независимым: может, это была стипендия или первая зарплата? На что вы потратили эти деньги?
                 span Присылайте рассказ о первом опыте покупки на собственные деньги!

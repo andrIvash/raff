@@ -22,6 +22,7 @@ const imagemin = require('gulp-imagemin');
 const buffer = require('vinyl-buffer');
 const merge = require('merge-stream');
 const fs = require('fs');
+var uglify = require('gulp-uglifyjs');
 // ---------------------------------------- webpack --------------------------//
 gulp.task('webpack', function() {
   
@@ -123,6 +124,23 @@ gulp.task('css.vendor', function() {
     .pipe(gulp.dest('./build/assets/styles'));
 });
 
+// ----------------------------------- js vendor -------------------------------------//
+gulp.task('js.vendor', function() {
+  return gulp.src([
+    './node_modules/jquery/dist/jquery.min.js',
+    './node_modules/jquery-modal/jquery.modal.js',
+    './src/scripts/jquery.jscrollpane.min.js',
+    './src/scripts/jquery.mousewheel.js',
+    './node_modules/moment/moment.js',
+    './src/scripts/vue.js'
+  ])
+    .pipe(concatCss('vendor.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./build/assets/scripts'));
+});
+
+
+
 // ---------------------------------------- clean ---------------------------------------//
 gulp.task('clean', function(cb) {
   return rimraf('./build', cb);
@@ -137,6 +155,7 @@ gulp.task('default', gulp.series(
     'copy.fonts',
     'css',
     'css.vendor',
+    'js.vendor',
     'webpack',
     'pug',
     'copy.readme'
@@ -154,6 +173,7 @@ gulp.task('build', gulp.series(
     'copy.fonts',
     'css',
     'css.vendor',
+    'js.vendor',
     'webpack',
     'pug',
     'copy.readme'

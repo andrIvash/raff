@@ -220,7 +220,73 @@ var API = {
   },
 
 
+  addKeyToDB: function(options, callback) {
+    options = options || {};
+    $.post(appOptions.api + 'storage/keys/?access_token=' + this.token,
+      {
+        label: options.label,
+        key: options.key,
+        value: options.value,
+        permissionLevel: 'Public'
+      },
+      function(data) {
+        // console.log(data);
+        if (void 0 !== data) {
+          if (typeof callback === 'function') {
+            callback(data);
+          }
+        }
+      });
+  },
 
+  deleteKeyFromDB: function(key, callback) {
+    key = key || '';
+    $.post(appOptions.api + 'storage/keys/' + key + '/delete/?access_token=' + this.token,
+      {},
+      function(data) {
+        // console.log(data);
+        if (void 0 !== data) {
+          if (typeof callback === 'function') {
+            callback(data);
+          }
+        }
+      });
+  },
+
+  getKeyFromDB: function(options, callback) {
+    options = options || {};
+    $.get(appOptions.api + 'storage/keys/' + options.key + '/?access_token=' + this.token, {})
+      .done(function(data) {
+        // console.log(data);
+        if (void 0 !== data) {
+          if (typeof callback === 'function') {
+            callback(data);
+          }
+        }
+      }).fail(function() {
+        if (typeof callback === 'function') {
+          callback(null);
+        }
+      });
+  },
+
+  getKeysFromDB: function(options, callback) {
+    options = options || {};
+    $.get(appOptions.api + 'storage/keys/?access_token=' + this.token,
+      {
+        label: options.label,
+        page_number: options.pageNumber,
+        page_size: options.pageSize
+      },
+      function(data) {
+        // console.log(data);
+        if (void 0 !== data) {
+          if (typeof callback === 'function') {
+            callback(data);
+          }
+        }
+      });
+  },
 
   // ---------------------------------------------------------------------------//
   getLonLat: function(callback) {
@@ -478,73 +544,7 @@ var API = {
     }, 2000);
   },
 
-  addKeyToDB: function(options, callback) {
-    options = options || {};
-    $.post(appOptions.api + 'storage/keys/?access_token=' + this.token,
-      {
-        label: options.label,
-        key: options.key,
-        value: options.value,
-        permissionLevel: 'Public'
-      },
-      function(data) {
-        // console.log(data);
-        if (void 0 !== data) {
-          if (typeof callback === 'function') {
-            callback(data);
-          }
-        }
-      });
-  },
-
-  deleteKeyFromDB: function(key, callback) {
-    key = key || '';
-    $.post(appOptions.api + 'storage/keys/' + key + '/delete/?access_token=' + this.token,
-      {},
-      function(data) {
-        // console.log(data);
-        if (void 0 !== data) {
-          if (typeof callback === 'function') {
-            callback(data);
-          }
-        }
-      });
-  },
-
-  getKeyFromDB: function(options, callback) {
-    options = options || {};
-    $.get(appOptions.api + 'storage/keys/' + options.key + '/?access_token=' + this.token, {})
-      .done(function(data) {
-        // console.log(data);
-        if (void 0 !== data) {
-          if (typeof callback === 'function') {
-            callback(data);
-          }
-        }
-      }).fail(function() {
-        if (typeof callback === 'function') {
-          callback(null);
-        }
-      });
-  },
-
-  getKeysFromDB: function(options, callback) {
-    options = options || {};
-    $.get(appOptions.api + 'storage/keys/?access_token=' + this.token,
-      {
-        label: options.label,
-        page_number: options.pageNumber,
-        page_size: options.pageSize
-      },
-      function(data) {
-        // console.log(data);
-        if (void 0 !== data) {
-          if (typeof callback === 'function') {
-            callback(data);
-          }
-        }
-      });
-  },
+  
 
   getNextPage: function(url, callback) {
     $.get(url + '&access_token=' + this.token, {},

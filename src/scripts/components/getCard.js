@@ -21,34 +21,37 @@ export default {
     //     auto: true
     //   }
     // );
-    $('#appslider ').owlCarousel({
-      nav: true,
-      margin: 20,
-      responsiveClass: true,
-      responsive: {
-        0: {
-          items: 1,
-          nav: false,
-          dots: true
-        },
-        700: {
-          items: 2,
-          nav: true
-        },
-        1000: {
-          items: 3,
-          nav: true
-        },
-        1240: {
-          items: 4,
-          nav: true
-        },
-        1900: {
-          items: 4,
-          nav: true
+    $(document).ready(function() {
+      $('#appslider').owlCarousel({
+        nav: true,
+        margin: 20,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 1,
+            nav: false,
+            dots: true
+          },
+          700: {
+            items: 2,
+            nav: true
+          },
+          1000: {
+            items: 3,
+            nav: true
+          },
+          1240: {
+            items: 4,
+            nav: true
+          },
+          1900: {
+            items: 4,
+            nav: true
+          }
         }
-      }
+      });
     });
+
   },
 
   methods: {
