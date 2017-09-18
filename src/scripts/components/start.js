@@ -1,7 +1,7 @@
 export default {
   template: '#start-template',
 
-  props: ['isShown', 'list'],
+  props: ['isShown', 'infoData'],
 
   data: function() {
     return {
@@ -24,7 +24,16 @@ export default {
       }
     }
   },
-  events: {
-
+  watch: {
+    infoData: function(newVal, oldVal) { // watch it
+      //console.log('Prop changed: ', newVal, ' | was: ', oldVal);
+      const cards = $('.card');
+      cards.each(function(index) {
+        if (newVal.articles[index].status === false) {
+          $(this).addClass('offline');
+        }
+      });
+    }
   }
 };
+

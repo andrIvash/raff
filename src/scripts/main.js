@@ -33,7 +33,10 @@ const _vm = new Vue({
     info: {
       summ: 0
     },
-    userList: []
+    userList: [],
+    temp: {
+      
+    }
   },
 
   components: {
@@ -103,7 +106,31 @@ const _vm = new Vue({
               lastvisit: Date.now(),
               firstvisit: Date.now(),
               summ: 25,
-              articles:[true, false, false, false]
+              articles: [
+                {
+                  status: true,
+                  commented: false,
+                  like: false
+                },
+                {
+                  status: false,
+                  commented: false,
+                  like: false
+                },
+                {
+                  status: false,
+                  commented: false,
+                  like: false
+                },
+                {
+                  status: false,
+                  commented: false,
+                  like: false
+                }
+              ],
+              mood: 100,
+              health: 100,
+              food: 100
             };
             that.userList.push({
               id: that.user.personId,
@@ -189,18 +216,28 @@ const _vm = new Vue({
       const diffFirst = firstDuration.asDays().toFixed();
       console.log(diffFirst, diffLast);
       this.info.lastvisit = Date.now();
-      if (diffLast >= 1) {
+      if (diffLast >= 1) {  // прибавляем деньги за возврат
         this.info.summ = this.info.summ + 25;
       }
       const userIndx = this.userList.findIndex(elem => elem.id === this.user.id);
       if (userIndx !== -1) {
         this.userList[userIndx].summ = this.info.summ;
       }
-      let weekOn = diffFirst % 7;
+      let weekOn = diffFirst % 7; // открываем новую статью
       console.log(weekOn);
       for (let i = 0; i <= weekOn; i++) {
-        this.info.articles[i] = true;
+        this.info.articles[i].status = true;
       }
+      
+      let foodLevel = this.info.food - (diffLast % 2 * 50).toFixed(); // уменьшаем еду
+      this.info.food = foodLevel < 0 ? 0 : this.info.food;
+      
+      let healthLevel = this.info.health - (diffLast % 4 * 25).toFixed(); // уменьшаем здоровье
+      this.info.food = healthLevel < 0 ? 0 : this.info.food;
+
+      let moodLevel = this.info.mood - (diffLast % 3 * 34).toFixed(); // уменьшаем настроение
+      this.info.food = moodLevel < 0 ? 0 : this.info.food;
+
       console.log(this.info);
       console.log(this.userList);
       API.addKeyToDB({

@@ -10,7 +10,7 @@ script(type="text/x-template" id="start-template")
     .main__content
       ul.cards
         li.cards__item
-          section.card(:class="{offline: !list[0]}" @click="onSelectArticle" data-id="0")
+          section.card(@click="onSelectArticle" data-id="0")
             .card__shadow
             .card__img-wrap
               .card__sign 
@@ -36,7 +36,7 @@ script(type="text/x-template" id="start-template")
               .card__spend.card__footer-elem Займет 25 минут
         
         li.cards__item
-          section.card(:class="{offline: !list[1]}" @click="onSelectArticle" data-id="1")
+          section.card(@click="onSelectArticle" data-id="1")
             .card__shadow
             .card__img-wrap
               .card__sign 
@@ -61,7 +61,7 @@ script(type="text/x-template" id="start-template")
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#share`)
               .card__spend.card__footer-elem Займет 25 минут
         li.cards__item
-          section.card(:class="{offline: !list[2]}" @click="onSelectArticle" data-id="2")
+          section.card(@click="onSelectArticle" data-id="2")
             .card__shadow
             .card__img-wrap
               .card__sign 
@@ -86,7 +86,7 @@ script(type="text/x-template" id="start-template")
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#share`)
               .card__spend.card__footer-elem Займет 25 минут
         li.cards__item
-          section.card(:class="{offline: !list[3]}" @click="onSelectArticle" data-id="3")
+          section.card(@click="onSelectArticle" data-id="3")
             .card__shadow
             .card__img-wrap
               .card__sign 

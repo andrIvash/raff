@@ -1,11 +1,11 @@
 export default {
   template: '#game-template',
 
-  props: ['isShown'],
+  props: ['isShown', 'infoData'],
 
   data: function() {
     return {
-
+      info: this.infoData
     };
   },
 
@@ -24,7 +24,14 @@ export default {
       $('.gamepanel').removeClass('active');
     }
   },
-
+  watch: {
+    infoData: function(newVal, oldVal) { // watch it
+      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+      $('.gamedock__mood .gamedock__val').css('width', `${this.infoData.mood}%`);
+      $('.gamedock__health .gamedock__val').css('width', `${this.infoData.health}%`);
+      $('.gamedock__food .gamedock__val').css('width', `${this.infoData.food}%`);
+    }
+  },
   events: {
 
   }

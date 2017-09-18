@@ -1,11 +1,11 @@
 extends _main-layout
 
 block main 
-    start-component(:is-shown="startShow", :list="info.articles")
-    article-component(:is-shown="articleShow", article-id="articleId")
+    start-component(:is-shown="startShow", :info-data="info")
+    article-component(:is-shown="articleShow", article-id="articleId", :info-data="info")
     get-card-component(:is-shown="getCardShow")
     list-component(:is-shown="listShow", :list-data="userList")
-    game-component(:is-shown="gameShow")
+    game-component(:is-shown="gameShow", :info-data="info")
     include common/_main
     include common/_article
     include common/_getcard

@@ -25,7 +25,7 @@ export default {
       this.$parent.$emit('sendReview', data);
     }
   },
-
+  
   events: {
 
   }
