@@ -12,8 +12,6 @@ import ListComponent from './components/list';
 import GameComponent from './components/game';
 
 
-
-
 const _vm = new Vue({
   el: '#app',
   data: {
@@ -212,49 +210,61 @@ const _vm = new Vue({
       // if we haven't yet passed the day of the week that I need:
       if (moment().isoWeekday() <= dayNumber) {
         // then just give me this week's instance of that day
-        return moment().isoWeekday(dayNumber).format('ll');
+        return moment().isoWeekday(dayNumber);
       } else {
         // otherwise, give me next week's instance of that day
-        return moment().add(1, 'weeks').isoWeekday(dayNumber).format('ll');
+        return moment().add(1, 'weeks').isoWeekday(dayNumber);
       }
     },
 
     updateData(res) {
       console.log(res);
       const that = this;
-      const now = moment(Date.now());
-      const lastDuration = moment.duration(now.diff(this.info.lastvisit));
-      const firstDuration = moment.duration(now.diff(this.info.firstvisit));
-      const diffLast = lastDuration.asDays().toFixed();
-      const diffFirst = firstDuration.asDays().toFixed();
-      console.log(diffFirst, diffLast);
+      //const now = moment(Date.now());
+      // const lastDuration = moment.duration(now.diff(this.info.lastvisit));
+      // const firstDuration = moment.duration(now.diff(this.info.firstvisit));
+      // const diffLast = lastDuration.asDays().toFixed();
+      // const diffFirst = firstDuration.asDays().toFixed();
+      // console.log(diffFirst, diffLast);
+      
+      const lastDays = moment(Date.now()).diff(moment(this.info.lastvisit), 'days');
+      const firstDays = moment(Date.now()).diff(moment(this.info.firstvisit), 'days');
+      
       this.info.lastvisit = Date.now();
-      if (diffLast >= 1) {  // прибавляем деньги за возврат
-        this.info.summ = this.info.summ + 25;
+      console.log(lastDays);
+
+      if (lastDays >= 1) {  // прибавляем деньги за возврат
+        this.info.summ = this.info.summ + 25 * lastDays;
       }
+
+      if (lastDays >= 7) {  // прибавляем зарплату раз в неделю
+        this.info.summ = this.info.summ + 100 * (lastDays % 7).toFixed();
+      }
+
+
       const userIndx = this.userList.findIndex(elem => elem.id === this.user.id);
       if (userIndx !== -1) {
-        this.userList[userIndx].summ = this.info.summ;
+        this.userList[userIndx].summ = this.info.summ; // обновляем список баллов
       }
-      let weekOn = diffFirst % 7; // открываем новую статью
+
+      let weekOn = moment(Date.now()).diff(moment(this.info.firstvisit), 'weeks'); // открываем новую статью
       console.log(weekOn);
       for (let i = 0; i <= weekOn; i++) {
         this.info.articles[i].status = true;
       }
       
-      let foodLevel = this.info.food - (diffLast % 2 * 50).toFixed(); // уменьшаем еду
+      let foodLevel = this.info.food - (lastDays % 2 * 50).toFixed(); // уменьшаем еду
       this.info.food = foodLevel < 0 ? 0 : this.info.food;
       
-      let healthLevel = this.info.health - (diffLast % 4 * 25).toFixed(); // уменьшаем здоровье
+      let healthLevel = this.info.health - (lastDays % 4 * 25).toFixed(); // уменьшаем здоровье
       this.info.food = healthLevel < 0 ? 0 : this.info.food;
 
-      let moodLevel = this.info.mood - (diffLast % 3 * 34).toFixed(); // уменьшаем настроение
+      let moodLevel = this.info.mood - (lastDays % 3 * 34).toFixed(); // уменьшаем настроение
       this.info.food = moodLevel < 0 ? 0 : this.info.food;
 
-      var weekDayToFind = moment().day('Monday').weekday(); //change to searched day name
       
-      this.info.nextPayment = this.getNexDay(1); // когда следующая зарплата
-      
+      this.info.nextPayment = this.getNexDay(1).locale('ru').format('ll'); // когда следующая зарплата
+      console.log(this.getNexDay(1).isSame(moment(Date.now())));
       
       console.log(this.info);
       console.log(this.userList);
