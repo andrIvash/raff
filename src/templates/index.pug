@@ -2,7 +2,7 @@ extends _main-layout
 
 block main 
     start-component(:is-shown="startShow", :info-data="info")
-    article-component(:is-shown="articleShow", article-id="articleId", :info-data="info")
+    article-component(:is-shown="articleShow", :article="article", :info-data="info", :user-data="user")
     get-card-component(:is-shown="getCardShow")
     list-component(:is-shown="listShow", :list-data="userList")
     game-component(:is-shown="gameShow", :info-data="info", :show-sc="showScenario", :user-data="user")

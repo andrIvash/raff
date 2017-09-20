@@ -1,7 +1,7 @@
 export default {
   template: '#article-template',
 
-  props: ['isShown', 'articleId'],
+  props: ['isShown', 'article', 'userData', 'infoData'],
 
   data: function() {
     return {
@@ -25,8 +25,12 @@ export default {
       this.$parent.$emit('sendReview', data);
     }
   },
-  
-  events: {
-
+  watch: {
+  //   articleId: function(newVal, oldVal) { // watch it
+  //     this.articleId = newVal;
+  //   }
+    isShown: function() {
+        
+    }
   }
 };
