@@ -45,12 +45,11 @@
   stroke: #3d4054;
   stroke-width: 2px;
   fill: #fff;
+  cursor: pointer;
 
-  .socials__like-icon.active,
-  &:hover {
+  &.active {
     stroke-width: 0;
     fill: #ff1c5b;
-    cursor: pointer;
   }
 }
 

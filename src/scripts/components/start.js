@@ -3,7 +3,7 @@ import { API } from '../api';
 export default {
   template: '#start-template',
 
-  props: ['isShown', 'infoData'],
+  props: ['isShown', 'infoData', 'articleList'],
 
   data: function() {
     return {
@@ -52,13 +52,7 @@ export default {
   },
   watch: {
     infoData: function(newVal, oldVal) { // watch it
-      //console.log('Prop changed: ', newVal, ' | was: ', oldVal);
-      const cards = $('.card');
-      cards.each(function(index) {
-        if (newVal.articles[index].status === false) {
-          $(this).addClass('offline');
-        }
-      });
+      
     }
   }
 };

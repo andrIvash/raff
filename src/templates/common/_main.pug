@@ -10,7 +10,7 @@ script(type="text/x-template" id="start-template")
     .main__content
       ul.cards
         li.cards__item
-          section.card(@click="onSelectArticle" data-id="0")
+          section.card(@click="onSelectArticle" data-id="0", :class='{offline: !infoData.articles[0].status}')
             .card__shadow
             .card__img-wrap
               .card__sign 
@@ -22,21 +22,21 @@ script(type="text/x-template" id="start-template")
             footer.card__footer
               .card__info.card__footer-elem Статья пока не доступна
               .card__show.card__footer-elem
-                span.card__show-value 120
+                span.card__show-value(v-text="articleList[0].watch")
                 svg.card__show-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#eye`)
               .card__like.card__footer-elem
-                span.card__like-value 5
+                span.card__like-value(v-text="articleList[0].likes")
                 svg.card__like-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)
-              .card__repost.card__footer-elem
+              //-.card__repost.card__footer-elem
                 span.card__repost-value 9
                 svg.card__repost-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#share`)
               .card__spend.card__footer-elem Займет 25 минут
         
         li.cards__item
-          section.card(@click="onSelectArticle" data-id="1")
+          section.card(@click="onSelectArticle" data-id="1", :class='{offline: !infoData.articles[1].status}')
             .card__shadow
             .card__img-wrap
               .card__sign 
@@ -48,20 +48,20 @@ script(type="text/x-template" id="start-template")
             footer.card__footer
               .card__info.card__footer-elem Статья пока не доступна
               .card__show.card__footer-elem
-                span.card__show-value 120
+                span.card__show-value(v-text="articleList[1].watch")
                 svg.card__show-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#eye`)
               .card__like.card__footer-elem
-                span.card__like-value 5
+                span.card__like-value(v-text="articleList[1].likes")
                 svg.card__like-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)
-              .card__repost.card__footer-elem
+              //-.card__repost.card__footer-elem
                 span.card__repost-value 9
                 svg.card__repost-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#share`)
               .card__spend.card__footer-elem Займет 25 минут
         li.cards__item
-          section.card(@click="onSelectArticle" data-id="2")
+          section.card(@click="onSelectArticle" data-id="2", :class='{offline: !infoData.articles[2].status}')
             .card__shadow
             .card__img-wrap
               .card__sign 
@@ -73,20 +73,20 @@ script(type="text/x-template" id="start-template")
             footer.card__footer
               .card__info.card__footer-elem Статья пока не доступна
               .card__show.card__footer-elem
-                span.card__show-value 120
+                span.card__show-value(v-text="articleList[2].watch")
                 svg.card__show-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#eye`)
               .card__like.card__footer-elem
-                span.card__like-value 5
+                span.card__like-value(v-text="articleList[2].likes")
                 svg.card__like-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)
-              .card__repost.card__footer-elem
+              //-.card__repost.card__footer-elem
                 span.card__repost-value 9
                 svg.card__repost-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#share`)
               .card__spend.card__footer-elem Займет 25 минут
         li.cards__item
-          section.card(@click="onSelectArticle" data-id="3")
+          section.card(@click="onSelectArticle" data-id="3", :class='{offline: !infoData.articles[3].status}')
             .card__shadow
             .card__img-wrap
               .card__sign 
@@ -98,14 +98,14 @@ script(type="text/x-template" id="start-template")
             footer.card__footer
               .card__info.card__footer-elem Статья пока не доступна
               .card__show.card__footer-elem
-                span.card__show-value 120
+                span.card__show-value(v-text="articleList[3].watch")
                 svg.card__show-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#eye`)
               .card__like.card__footer-elem
-                span.card__like-value 5
+                span.card__like-value(v-text="articleList[3].likes")
                 svg.card__like-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)
-              .card__repost.card__footer-elem
+              //-.card__repost.card__footer-elem
                 span.card__repost-value 9
                 svg.card__repost-icon.card__icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#share`)

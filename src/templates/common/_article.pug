@@ -191,12 +191,12 @@ script(type="text/x-template" id="article-template")
           .article__socials.socials(v-show="isShown") 
             .socials__left
               .socials__show
-                span.socials__show-value 120
+                span.socials__show-value(v-text='article.watch')
                 svg.socials__show-icon
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#eye`)
-              .socials__like
-                span.socials__like-value 5
-                svg.socials__like-icon
+              .socials__like(@click="onLiked")
+                span.socials__like-value(v-text='article.likes')
+                svg.socials__like-icon(:class='{active: infoData.articles[article.id].like}')
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)
             .socials__right
               ul.socials__list
@@ -216,7 +216,7 @@ script(type="text/x-template" id="article-template")
                   a.socials__link.socials__link_vk(href="/")
                     svg.socials__icon
                       use(xlink:href=`${data.cdn}img/sprite/sprite.svg#ok`)                  
-          form.article__form(v-show="!isCommented && isShown", @submit.prevent="sendReview")
+          form.article__form(v-show="!infoData.articles[article.id].commented && isShown", @submit="sendReview")
             .article__form-item  
               .artice__form-text  Вспомните, когда вы впервые почувствовали себя финансово независимым: может, это была стипендия или первая зарплата? На что вы потратили эти деньги?
                 span Присылайте рассказ о первом опыте покупки на собственные деньги!
@@ -225,18 +225,18 @@ script(type="text/x-template" id="article-template")
             .article__form-item 
               button.article__form-btn(type="submit") Отправить
 
-          .article__story(v-show="isCommented && isShown") Благодарим за ваш рассказ! Ниже вы можете ознакомиться с историями других участников.   
-          .comments(v-show="isCommented && isShown")
+          .article__story(v-show="!infoData.articles[article.id].commented && isShown") Благодарим за ваш рассказ! Ниже вы можете ознакомиться с историями других участников.   
+          .comments(v-show="infoData.articles[article.id].commented && isShown")
             ul.comments__list
-              li.comments__item
-                .comment
+              li.comments__item(v-for="article, index in article.comments")
+                .comment(v-bind:data-id="index")
                   .comment__foto
-                    img.comment__img(src=`${data.cdn}/img/userpic.png` title="user")
+                    img.comment__img(:src="article.photo" title="user")
                   .comment__content
-                    h3.comment__title Константин Константинопольский
-                    p.comment__text Наверняка вы уже слышали о сетке 8pt Grid, если ещё нет, то самое время это сделать, так как она может упростить жизнь вам и вашим разработчикам. Стало довольно распространенным строить сетки с кратностью равной 8. В этой статье я расскажу о своей методике и поделюсь нужными инструментами в конце статьи
-                  .comment__like
-                    span.comment__like-value 5
+                    h3.comment__title {{article.name}}
+                    p.comment__text {{article.text}}
+                  .comment__like(@click="onCommentLiked") 
+                    span.comment__like-value {{article.likes}}
                     svg.comment__like-icon
                       use(xlink:href=`${data.cdn}img/sprite/sprite.svg#like`)       
             //-a.comments__btn(href="/") Загрузить еще

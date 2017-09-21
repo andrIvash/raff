@@ -3,7 +3,7 @@ script(type="text/x-template" id="list-template" lang="pug")
     .main__content
       .container
         .section.main-list
-          a.mainlist__btn(href="/", v-on:click="goPlay") К игре
+          a.mainlist__btn(href="/", v-on:click="goPlay", v-if="userData.roles[0] !== 'EduParent'") К игре
             svg
               use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowl`)
           .main-list__inner()

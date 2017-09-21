@@ -17,11 +17,13 @@ const _vm = new Vue({
   el: '#app',
   data: {
     loading: false, // loader
+    
     startShow: true, // show start page
     articleShow: false, // shop article page
     getCardShow: false, // show card page
     listShow: false, // show user list page
     gameShow: false, // show game
+    
     article: {}, // active article
     user: {  // active user
       firstName: '',
@@ -29,11 +31,12 @@ const _vm = new Vue({
       photoSmall: '',
       id: ''
     },
-    info: { // add info
+    info: { //  app info for current user
       summ: 0
     },
     userList: [], //user list
-    showScenario: false // modal in the game
+    showScenario: false, // modal in the game
+    articleList: []
   },
 
   components: {
@@ -64,23 +67,45 @@ const _vm = new Vue({
       Auth.auth();
     }
 
+    // return to main page
     this.$on('goBack', function() {
       this.clearView();
       this.startShow = true;
     });
+    // go to game page
     this.$on('goPlay', function() {
       this.clearView();
       this.gameShow = true;
     });
+    // select article
     this.$on('changeArticle', function(resultArticle) {
       console.log(resultArticle);
       this.clearView();
-      this.article = resultArticle;
+      if(!this.article.hasOwnProperty('id')) {
+        this.article = resultArticle;
+      }
       this.articleShow = true;
+    });
+    // send review
+    this.$on('sendReview', function(post) {
+      this.article.comments.push(post);
+      this.info.articles[this.article.id].commented = true;
+      this.info.articles[this.article.id].comments.push(false);
+      this.saveAllData();
+    });
+    //save all data
+    this.$on('save', function(activeArticleId) {
+      this.articleList[activeArticleId].likes = this.article.likes;
+      this.articleList[activeArticleId].watch = this.article.watch;
+
+      console.log('save --- ', this.article);
+      console.log('save --- ', this.info);
+      
+      this.saveAllData();
     });
   },
   methods: {
-    startApp: function() {
+    startApp() {
       const that = this;
       API.getUserInfo().then((res) => {
         that.loading = true; // инициализация спиннера
@@ -99,7 +124,7 @@ const _vm = new Vue({
       }).then(function() {
         API.getKeyFromDB({key: `raff_activity-${that.user.personId}`}, function(res) {
           console.log(res);
-          if (res === null) { // new user
+          if (res === null) { // new user !!!!!!!!
             that.info = {
               lastvisit: Date.now(),
               firstvisit: Date.now(),
@@ -109,35 +134,39 @@ const _vm = new Vue({
                   status: true,
                   commented: false,
                   like: false,
-                  opendate: 0
+                  opendate: 0,
+                  comments: []
 
                 },
                 {
                   status: false,
                   commented: false,
                   like: false,
-                  opendate: 0
+                  opendate: 0,
+                  comments: []
                 },
                 {
                   status: false,
                   commented: false,
                   like: false,
-                  opendate: 0
+                  opendate: 0,
+                  comments: []
                 },
                 {
                   status: false,
                   commented: false,
                   like: false,
-                  opendate: 0
+                  opendate: 0,
+                  comments: []
                 }
               ],
               mood: 100,
               health: 100,
               food: 100,
-              nextPayment: '31/12/18'
+              nextPayment: ' '
             };
             API.getKeyFromDB({key: 'raff_activity-userList'}, function(res) { //check user list
-              if (res !== null) {
+              if (res !== null) { // !!!!!!
                 that.userList = JSON.parse(res.Value);
                 that.userList.push({
                   id: that.user.personId,
@@ -156,22 +185,9 @@ const _vm = new Vue({
                 });
               }
               console.log(that.info);
-              API.addKeyToDB({ // save data
-                label: 'raff',
-                key: `raff_activity-${that.user.personId}`,
-                value: JSON.stringify(that.info),
-                permissionLevel: 'Public'
-              }, function(res) {
-                // console.log(res);
-                API.addKeyToDB({
-                  label: 'raff',
-                  key: 'raff_activity-userList',
-                  value: JSON.stringify(that.userList),
-                  permissionLevel: 'Public'
-                }, function(res) {
-                  // console.log(res);
-                });
-              });
+              that.saveAllData();
+              that.updateData(res) // update user data !!!!
+              that.makeArticleList() // !!!!!
             });
           } else {
             const info = JSON.parse(res.Value);
@@ -180,6 +196,7 @@ const _vm = new Vue({
               if (res !== null) {
                 that.userList = JSON.parse(res.Value);
                 that.updateData(res) // update user data
+                that.makeArticleList()
               } else {
                 throw new Error('wrong api data');
               }
@@ -188,7 +205,43 @@ const _vm = new Vue({
         });
       });
     },
-
+    makeArticleList() {
+      const that = this;
+      that.getArticleData(0).then((res) => {
+        that.articleList.push(res);
+        return that.getArticleData(1);
+      }).then((res) => {
+        that.articleList.push(res);
+        return that.getArticleData(2);
+      }).then((res) => {
+        that.articleList.push(res);
+        return that.getArticleData(3);
+      }).then((res) => {
+        that.articleList.push(res);
+      });
+    },
+    getArticleData(id) {
+      return new Promise((resolve, reject) => {
+        let art;
+        API.getKeyFromDB({key: `raff_activity-articles-${id}`}, function(res) {
+          if (res !== null) {
+            const data = JSON.parse(res.Value);
+            art = {
+              id: data.id,
+              likes: data.likes,
+              watch: data.watch
+            };
+          } else {
+            art = {
+              id: id,
+              likes: 0,
+              watch: 0
+            };
+          }
+          resolve(art);
+        });
+      });
+    },
     onShowMenu(even) {
       event.preventDefault();
       $('.top-menu').toggle('fast');
@@ -241,7 +294,7 @@ const _vm = new Vue({
       const firstDays = moment(Date.now()).diff(moment(this.info.firstvisit), 'days');
       
       this.info.lastvisit = Date.now();
-      console.log(lastDays);
+      console.log('last days ----', lastDays);
 
       if (lastDays >= 1) {  // прибавляем деньги за возврат
         this.info.summ = this.info.summ + 25 * lastDays;
@@ -272,7 +325,7 @@ const _vm = new Vue({
       this.info.food = moodLevel < 0 ? 0 : this.info.food;
 
       
-      this.info.nextPayment = this.getNexDay(1).locale('ru').format('ll'); // когда следующая зарплата
+      this.info.nextPayment = this.getNexDay(2).locale('ru').format('ll'); // когда следующая зарплата
       console.log(this.getNexDay(1).isSame(moment(Date.now())));
       
       setTimeout(function() {
@@ -283,8 +336,17 @@ const _vm = new Vue({
         this.showScenario = true;
       }
       
-      console.log(this.info);
-      console.log(this.userList);
+      this.saveAllData();
+    },
+    saveAllData() {
+      const that = this;
+      // user list update
+      this.userList.forEach((elem) => {
+        if (elem.id === this.user.personId) {
+          elem.summ = this.info.summ;
+        }
+      });
+
       API.addKeyToDB({
         label: 'raff',
         key: `raff_activity-${this.user.personId}`,
@@ -292,11 +354,17 @@ const _vm = new Vue({
         permissionLevel: 'Public'
       }, function(res) {
         API.addKeyToDB({
-          key: 'raff_activity-userList',
-          value: JSON.stringify(that.userList),
+          key: `raff_activity-articles-${that.article.id}`,
+          value: JSON.stringify(that.article),
           permissionLevel: 'Public'
         }, function(res) {
+          API.addKeyToDB({
+            key: 'raff_activity-userList',
+            value: JSON.stringify(that.userList),
+            permissionLevel: 'Public'
+          }, function(res) {
 
+          });
         });
       });
     }

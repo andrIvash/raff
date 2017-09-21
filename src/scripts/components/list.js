@@ -7,6 +7,9 @@ export default {
       type: Boolean,
       default: false
     },
+    userData: {
+      type: Object
+    },
     listData: {
       type: Array,
       default:[{
