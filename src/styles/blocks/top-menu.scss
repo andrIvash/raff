@@ -58,20 +58,21 @@
 
 .top-menu__item {
   margin-left: 10px;
-  min-width: 190px;
+  //min-width: 190px;
   text-align: center;
+  flex: 1 1 15%;
 
   &:first-child {
-    min-width: 94px;
+    //min-width: 94px;
     margin-left: 0;
   }
 
   &:nth-child(2) {
-    min-width: 140px;
+    //min-width: 140px;
   }
 
   &:last-child {
-    min-width: 192px;
+    //min-width: 192px;
   }
 
   @include laptop() {

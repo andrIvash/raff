@@ -22,24 +22,6 @@ script(type="text/x-template" id="getcard-template")
           .container
             .promocard__inner-text
               .promocard__text С детской картой
-              h2.promocard__subtitle Ваш ребенок сможет:
-              ul.promocard__list
-                li.promocard__item 
-                  span Получать подарки от Банка и cashback 5% на все покупки
-                  svg
-                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
-                li.promocard__item 
-                  span Бесплатно пополнять карту с карт любых банков
-                  svg
-                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
-                li.promocard__item Расплачиваться картой самостоятельно
-                  svg
-                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
-                li.promocard__item 
-                  span Обучаться финансовой грамотности, анализируя свои траты
-                  svg
-                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
-              .promocard__text С детской картой
               h2.promocard__subtitle Вы сможете:
               ul.promocard__list
                 li.promocard__item 
@@ -53,11 +35,34 @@ script(type="text/x-template" id="getcard-template")
                 li.promocard__item 
                   span Быть уверенным в безопасности
                   svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+              .promocard__text С детской картой
+              h2.promocard__subtitle Ваш ребенок сможет:
+              ul.promocard__list
+                li.promocard__item 
+                  span Получать подарки от Банка и cashback
+                  span.star * 
+                  span &nbsp;5% на все покупки
+                  span.star ** 
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+                li.promocard__item 
+                  span Бесплатно пополнять карту с карт любых банков
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+                li.promocard__item Расплачиваться картой самостоятельно
+                  svg
+                    use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
+                li.promocard__item 
+                  span Обучаться финансовой грамотности, анализируя свои траты
+                  svg
                     use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)            
               a.promocard__btn(href="/") Оформить карту
         .promocard__mobile.mobile
           .container
-            h2.mobile__title А ещё специально для молодых держателей карт разработано мобильное приложение «Райффайзен-Start», которое:
+            h2.mobile__title А ещё специально для молодых держателей карт разработано мобильное приложение «Райффайзен-Start
+              span.start ***
+              span », которое:
             .mobile__content
               .mobile__item Поможет найти ответы на вопросы, связанные с личными финансами
                 svg.mobile__svg.mobile__svg_quest
@@ -68,7 +73,8 @@ script(type="text/x-template" id="getcard-template")
               .mobile__item Дает информацию об остатке на счете 
                 svg.mobile__svg.mobile__svg_wallet
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#wallet`)    
-              .mobile__item Позволяет отслеживать расходы 
+              .mobile__item Позволяет отслеживать расходы
+                span.star ****
                 svg.mobile__svg.mpbile__svg_ccard
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#ccard`)
         .appslider-wrap          
@@ -87,3 +93,38 @@ script(type="text/x-template" id="getcard-template")
             .applinks__items
               a.applink__link.applink__link_i(href="/")
               a.applink__link.applink__link_a(href="/")    
+
+    ul.footer__comments
+      .container
+        li.footer__comments-elem
+          .footer__comments-sign
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`) 
+          .footer__coments-text Возврат средств
+        li.footer__comments-elem
+          .footer__comments-sign
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)    
+          .footer__coments-text Для владельцев карты старше 14 лет. Ежемесячная сумма выплат не превышает 200 рублей
+        li.footer__comments-elem
+          .footer__comments-sign
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`) 
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)     
+          .footer__coments-text Старт
+        li.footer__comments-elem
+          .footer__comments-sign
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`) 
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`) 
+            svg.footer__svg
+              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)       
+          .footer__coments-text Категория 0+  

@@ -241,6 +241,10 @@
     height: 15px;
     fill: #000;
   }
+  .star {
+    font-size: 25px;
+    font-family: ralewaybold;
+  }
 }
 
 .promocard__btn {
@@ -293,6 +297,10 @@
     font-family: ralewaybold;
     font-size: 30px;
     text-align: center;
+
+    .start {
+      font-size: 40px;
+    }
   
     @include tablet {
       font-size: 24px;
@@ -329,6 +337,11 @@
     align-items: flex-start;
     font-family: ralewayregular;
     font-size: 20px;
+
+    .star {
+      font-size: 36px;
+      font-family: ralewaybold;
+    }
 
     @media screen and (max-width: 939px) {
       margin: 0 auto;

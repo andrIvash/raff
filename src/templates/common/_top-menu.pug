@@ -5,6 +5,10 @@
   .top-menu__user
     include _user
   ul.top-menu__list(v-on:click="onSelectMenu")
+    li.top-menu__item(data-type="rules" )
+      a.top-menu__link(href="/", :class="{active: rulesShow}") Правила
+    li.top-menu__item(data-type="friend" )
+      a.top-menu__link(href="/", :class="{active: friendShow}") Пригласить друзей
     li.top-menu__item(data-type="start" )
       a.top-menu__link(href="/", :class="{active: startShow}") Образование
     li.top-menu__item(data-type="list")
