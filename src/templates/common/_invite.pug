@@ -1,0 +1,23 @@
+script(type="text/x-template" id="invite-template" lang="pug")
+  main.main.invite_list(v-show="isShown")     
+    .main__content.invite-list
+      .container
+        .section.main-list
+          .main-list__inner()
+            .main-list__header
+              .score.score_title
+                .score__number Место
+                .score__name Участник
+                .score__value  
+            ul.main-list__list
+              li.main-list__item(v-for="(item, index) in listData")
+                .score
+                  .score__number.invite__number(v-text='index + 1')
+                  .score__info
+                    .score__foto
+                      img.score__img(:src='item.photo' title="user")
+                    .score__data  
+                      .score__name(v-text='item.name')
+                      .score__city(v-if='item.city' v-text='item.city')
+                  .score__value
+                    .button(class="invite-btn" @click="onInvite") Пригласить

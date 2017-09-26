@@ -11,6 +11,7 @@ import ArticleComponent from './components/article';
 import GetCardComponent from './components/getCard';
 import ListComponent from './components/list';
 import GameComponent from './components/game';
+import InviteComponent from './components/invite';
 
 
 const _vm = new Vue({
@@ -23,6 +24,7 @@ const _vm = new Vue({
     getCardShow: false, // show card page
     listShow: false, // show user list page
     gameShow: false, // show game
+    inviteShow: false, // show game
     
     article: {}, // active article
     user: {  // active user
@@ -44,7 +46,8 @@ const _vm = new Vue({
     articleComponent: ArticleComponent,
     getCardComponent: GetCardComponent,
     listComponent: ListComponent,
-    gameComponent: GameComponent
+    gameComponent: GameComponent,
+    inviteComponent: InviteComponent
   },
 
   mounted: function() {
@@ -103,6 +106,31 @@ const _vm = new Vue({
       
       this.saveAllData();
     });
+    // send invite
+    this.$on('onInvite', function(id) {
+      console.log(id);
+      this.info.invite = this.info.invite + 1;
+      if (this.info.invite <= 50) {
+        this.info.summ = this.info.summ + 20;
+        API.sendInvite({
+          users: [id],
+          message: 'Раффайзен Банк. Финансовая грамотность'
+        }, function(res) {
+          if (res !== null) {
+            const modalElem = $('#modal2');
+            modalElem.modal({
+              fadeDuration: 250,
+              fadeDelay: 1.5
+            });
+            modalElem.find('.modal__content').text('Приглашение отправлено');
+            setTimeout(function() {
+              $.modal.close();
+            }, 3000);
+            //this.saveAllData();
+          }
+        });
+      }
+    });
   },
   methods: {
     startApp() {
@@ -124,11 +152,12 @@ const _vm = new Vue({
       }).then(function() {
         API.getKeyFromDB({key: `raff_activity-${that.user.personId}`}, function(res) {
           console.log(res);
-          if (res === null) { // new user !!!!!!!!
+          if (res == null) { // new user !!!!!!!!
             that.info = {
               lastvisit: Date.now(),
               firstvisit: Date.now(),
               summ: 25,
+              invite: 0,
               articles: [
                 {
                   status: true,
@@ -187,6 +216,7 @@ const _vm = new Vue({
               console.log(that.info);
               that.saveAllData();
               that.updateData(res) // update user data !!!!
+              //that.delArticleData(0); delete article
               that.makeArticleList() // !!!!!
             });
           } else {
@@ -237,9 +267,23 @@ const _vm = new Vue({
               likes: 0,
               watch: 0
             };
-          }
+         }
           resolve(art);
         });
+      });
+    },
+    delArticleData(id) {
+      return new Promise((resolve, reject) => {
+        API.addKeyToDB({
+          key: `raff_activity-articles-${id}`,
+          value: JSON.stringify({
+            id: id,
+            likes: 0,
+            watch: 0
+          }),
+          permissionLevel: 'Public'
+        })
+          resolve();
       });
     },
     onShowMenu(even) {
@@ -267,6 +311,7 @@ const _vm = new Vue({
       this.getCardShow = false;
       this.listShow = false;
       this.gameShow = false;
+      this.inviteShow = false;
     },
 
     getNexDay(dayNumber) { // получить дату следующего дня недели 4 for Thursday

@@ -1,0 +1,32 @@
+.invite_list {
+  min-height: 100vh;
+  background-color: #f3f3f4;
+
+  .container {
+    max-width: 800px;
+    position: relative;
+    padding-top: 80px;
+    flex-direction: column;
+  }
+}
+.main__content.invite-list {
+  .button.invite-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 165px;
+    height: 40px;
+    border-radius: 4px;
+    background: #fbef48;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+    font-family: "ralewaybold";
+    font-size: 12px;
+    color: #000;
+    
+    &:hover {
+      box-shadow: 0 2px 6px rgba(0,0,0,.14);
+    }
+  }
+}

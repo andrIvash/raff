@@ -7,14 +7,14 @@
   ul.top-menu__list(v-on:click="onSelectMenu")
     li.top-menu__item(data-type="rules" )
       a.top-menu__link(href="/", :class="{active: rulesShow}") Правила
-    li.top-menu__item(data-type="friend" )
-      a.top-menu__link(href="/", :class="{active: friendShow}") Пригласить друзей
+    li.top-menu__item(data-type="invite" )
+      a.top-menu__link(href="/", :class="{active: inviteShow}") Пригласить<br> друзей
     li.top-menu__item(data-type="start" )
       a.top-menu__link(href="/", :class="{active: startShow}") Образование
     li.top-menu__item(data-type="list")
       a.top-menu__link(href="/", :class="{active: listShow}") Рейтинг участников
     li.top-menu__item(data-type="getCard")
-      a.top-menu__link(href="/", :class="{active: getCardShow}") Детская карта Райффайзен
+      a.top-menu__link(href="/", :class="{active: getCardShow}") Детская карта Райффайзенбанка
   .top-menu__main-btn
     include _main-btn
   .top-menu__logo

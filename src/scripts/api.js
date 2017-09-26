@@ -219,6 +219,21 @@ var API = {
 
   },
 
+  sendInvite: function(options, callback) {
+    $.post(appOptions.api + 'invites/?access_token=' + this.token,
+      {
+          userIDs: options.users,
+          message: options.message
+      },
+      function(data) {
+        // console.log(data);
+        if (void 0 !== data) {
+          if (typeof callback === 'function') {
+            callback(data);
+          }
+        }
+      });
+  },
 
   addKeyToDB: function(options, callback) {
     options = options || {};

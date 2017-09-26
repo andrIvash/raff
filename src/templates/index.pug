@@ -5,18 +5,20 @@ block main
     article-component(:is-shown="articleShow", :article="article", :info-data="info", :user-data="user")
     get-card-component(:is-shown="getCardShow")
     list-component(:is-shown="listShow", :list-data="userList", :user-data="user")
+    invite-component(:is-shown="inviteShow", :list-data="userList", :user-data="user")
     game-component(:is-shown="gameShow", :info-data="info", :show-sc="showScenario", :user-data="user")
     .footer
         .container
             .footer__comment
             .footer__text
-                |ПОД ДЕТСКОЙ КАРТОЙ ПОНИМАЕТСЯ КАРТА  РАЙФФАЙЗЕН KIDS/TEENS (ПРОСЬБА УКАЗАТЬ ПЕРЕВОД) MASTERCARD STANDARD ДЛЯ ДЕТЕЙ В ВОЗРАСТЕ ОТ 6 ДО 17 ЛЕТ (ВКЛЮЧИТЕЛЬНО). ДЕТЯМ С 6 ДО 14 ЛЕТ КАРТА МОЖЕТ БЫТЬ ОФОРМЛЕНА ТОЛЬКО КАК ДОПОЛНИТЕЛЬНАЯ КАРТА К СЧЕТУ РОДИТЕЛЯ. ДЕТЯМ С 14 ДО 17 ЛЕТ (ВКЛЮЧИТЕЛЬНО) КАРТА МОЖЕТ БЫТЬ КАК ДОПОЛНИТЕЛЬНОЙ, ТАК И ОСНОВНОЙ К СЧЕТУ РЕБЕНКА ПРИ НАЛИЧИИ СОГЛАСИЯ РОДИТЕЛЯ. АО РАЙФФАЙЗЕНБАНК. 
+                |ПОД ДЕТСКОЙ КАРТОЙ ПОНИМАЕТСЯ КАРТА  РАЙФФАЙЗЕН KIDS/TEENS (ДЕТИ/ПОДРОСТКИ) MASTERCARD STANDARD ДЛЯ ДЕТЕЙ В ВОЗРАСТЕ ОТ 6 ДО 17 ЛЕТ (ВКЛЮЧИТЕЛЬНО). ДЕТЯМ С 6 ДО 14 ЛЕТ КАРТА МОЖЕТ БЫТЬ ОФОРМЛЕНА ТОЛЬКО КАК ДОПОЛНИТЕЛЬНАЯ КАРТА К СЧЕТУ РОДИТЕЛЯ. ДЕТЯМ С 14 ДО 17 ЛЕТ (ВКЛЮЧИТЕЛЬНО) КАРТА МОЖЕТ БЫТЬ КАК ДОПОЛНИТЕЛЬНОЙ, ТАК И ОСНОВНОЙ К СЧЕТУ РЕБЕНКА ПРИ НАЛИЧИИ СОГЛАСИЯ РОДИТЕЛЯ. АО РАЙФФАЙЗЕНБАНК. 
             .footer__sign АО «Райффайзенбанк»    
     include common/_main
     include common/_article
     include common/_getcard
     include common/_list
     include common/_game
+    include common/_invite
 
 
     

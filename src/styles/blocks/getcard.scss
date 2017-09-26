@@ -245,6 +245,12 @@
     font-size: 25px;
     font-family: ralewaybold;
   }
+  .number {
+    position: relative;
+    top: -10px;
+    font-size: 18px;
+    font-family: ralewaybold;
+  }
 }
 
 .promocard__btn {
@@ -301,6 +307,12 @@
     .start {
       font-size: 40px;
     }
+    .number {
+      position: relative;
+      top: -15px;
+      font-size: 18px;
+      font-family: ralewaybold;
+    }
   
     @include tablet {
       font-size: 24px;
@@ -340,6 +352,12 @@
 
     .star {
       font-size: 36px;
+      font-family: ralewaybold;
+    }
+    .number {
+      position: relative;
+      top: -10px;
+      font-size: 18px;
       font-family: ralewaybold;
     }
 

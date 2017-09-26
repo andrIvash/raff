@@ -3,7 +3,7 @@ script(type="text/x-template" id="getcard-template")
     .hero
       .container
         .hero__title
-          h1.hero__text Детская карта Райффайзен Банк
+          h1.hero__text Детская карта Райффайзенбанка
           .hero__sign
             svg.hero__svg(viewBox="0 0 200 100" preserveAspectRatio="none")
               polygon(points="0,0 0,200 200,0")
@@ -36,14 +36,14 @@ script(type="text/x-template" id="getcard-template")
                   span Быть уверенным в безопасности
                   svg
                     use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
-              .promocard__text С детской картой
+              
               h2.promocard__subtitle Ваш ребенок сможет:
               ul.promocard__list
                 li.promocard__item 
                   span Получать подарки от Банка и cashback
-                  span.star * 
+                  span.number 1
                   span &nbsp;5% на все покупки
-                  span.star ** 
+                  span.number 2 
                   svg
                     use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)
                 li.promocard__item 
@@ -58,10 +58,11 @@ script(type="text/x-template" id="getcard-template")
                   svg
                     use(xlink:href=`${data.cdn}img/sprite/sprite.svg#arrowr`)            
               a.promocard__btn(href="/") Оформить карту
+              a.promocard__link(href="/") Подробнее
         .promocard__mobile.mobile
           .container
-            h2.mobile__title А ещё специально для молодых держателей карт разработано мобильное приложение «Райффайзен-Start
-              span.start ***
+            h2.mobile__title А ещё специально для юных держателей карт разработано мобильное приложение «Райффайзен-Start
+              span.number 3
               span », которое:
             .mobile__content
               .mobile__item Поможет найти ответы на вопросы, связанные с личными финансами
@@ -74,7 +75,7 @@ script(type="text/x-template" id="getcard-template")
                 svg.mobile__svg.mobile__svg_wallet
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#wallet`)    
               .mobile__item Позволяет отслеживать расходы
-                span.star ****
+                span.number 4
                 svg.mobile__svg.mpbile__svg_ccard
                   use(xlink:href=`${data.cdn}img/sprite/sprite.svg#ccard`)
         .appslider-wrap          
@@ -97,34 +98,19 @@ script(type="text/x-template" id="getcard-template")
     ul.footer__comments
       .container
         li.footer__comments-elem
-          .footer__comments-sign
-            svg.footer__svg
-              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`) 
+          .footer__comments-sign-number 1 -
           .footer__coments-text Возврат средств
         li.footer__comments-elem
-          .footer__comments-sign
-            svg.footer__svg
+          .footer__comments-sign-number 2 -
+            //-svg.footer__svg
               use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)
-            svg.footer__svg
+            //-svg.footer__svg
               use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)    
           .footer__coments-text Для владельцев карты старше 14 лет. Ежемесячная сумма выплат не превышает 200 рублей
         li.footer__comments-elem
-          .footer__comments-sign
-            svg.footer__svg
-              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)
-            svg.footer__svg
-              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`) 
-            svg.footer__svg
-              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)     
+          .footer__comments-sign-number 3 -
+            
           .footer__coments-text Старт
         li.footer__comments-elem
-          .footer__comments-sign
-            svg.footer__svg
-              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)
-            svg.footer__svg
-              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`) 
-            svg.footer__svg
-              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`) 
-            svg.footer__svg
-              use(xlink:href=`${data.cdn}img/sprite/sprite.svg#asterisk`)       
+          .footer__comments-sign-number 4 -     
           .footer__coments-text Категория 0+  

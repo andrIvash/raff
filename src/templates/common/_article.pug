@@ -218,6 +218,7 @@ script(type="text/x-template" id="article-template")
                       use(xlink:href=`${data.cdn}img/sprite/sprite.svg#ok`)                  
           form.article__form(v-show="!infoData.articles[article.id].commented && isShown", @submit="sendReview")
             .article__form-item  
+              .artice__form-title КОНКУРС! Поделитесь своей историей!
               .artice__form-text  Вспомните, когда вы впервые почувствовали себя финансово независимым: может, это была стипендия или первая зарплата? На что вы потратили эти деньги?
                 span Присылайте рассказ о первом опыте покупки на собственные деньги!
             .article__form-item 
@@ -225,7 +226,7 @@ script(type="text/x-template" id="article-template")
             .article__form-item 
               button.article__form-btn(type="submit") Отправить
 
-          .article__story(v-show="!infoData.articles[article.id].commented && isShown") Благодарим за ваш рассказ! Ниже вы можете ознакомиться с историями других участников.   
+          .article__story(v-show="infoData.articles[article.id].commented && isShown") Благодарим за ваш рассказ! Ниже вы можете ознакомиться с историями других участников.   
           .comments(v-show="infoData.articles[article.id].commented && isShown")
             ul.comments__list
               li.comments__item(v-for="article, index in article.comments")

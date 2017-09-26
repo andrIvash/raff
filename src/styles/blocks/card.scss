@@ -172,3 +172,18 @@
   }
 }
 
+.promocard__link {
+  display: block;
+  margin: 20px auto;
+  max-width: 150px;
+  padding: 0 5px;
+  text-align: center;
+  font-family: ralewaysemibold;
+  font-size: 16px;
+  color: #000;
+
+  &:active,
+  &:hover {
+    text-decoration: none;
+  }
+}
