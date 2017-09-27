@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> </title>
+    <meta content="" name="author">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/styles/vendor.css">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <script src="assets/scripts/vendor.js" defer></script>
+    <script src="assets/scripts/common.js" defer></script>
+    <script src="assets/scripts/app.bundle.js" defer></script><!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
+  </head>
+  <body>
+    <div id="app">
+      <div class="wrapper" v-show="loading" v-bind:class="{visuallyHidden: !loading}">
+        <header class="header"><a class="header__menu-btn" href="/" v-on:click="onShowMenu">
+            <svg class="header__menu__svg">
+              <use xlink:href="assets/img/sprite/sprite.svg#menu"></use>
+            </svg></a>
+          <div class="logo">
+            <svg class="logo__svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+              <polygon points="0,0 0,200 200,0"></polygon>
+            </svg><a class="logo__title" href="/"><img class="logo__img" src="assets/img/raff.png" title="Райффайзен Банк"></a>
+          </div>
+          <div class="top-menu"><a class="top-menu__btn" href="/" v-on:click="onShowMenu">
+              <svg width="20px" height="20px" viewBox="0 0 611.979 611.979">
+                <path d="M356.781,305.982L601.453,61.311c14.033-14.033,14.033-36.771,0-50.774c-14.004-14.033-36.741-14.033-50.774,0L306.007,255.208L61.277,10.536c-14.004-14.033-36.771-14.033-50.774,0c-14.004,14.004-14.004,36.742,0,50.774l244.701,244.672L10.503,550.684c-14.004,14.004-14.004,36.771,0,50.774c7.016,7.017,16.216,10.51,25.387,10.51c9.2,0,18.371-3.493,25.387-10.51l244.701-244.701l244.671,244.701c7.017,7.017,16.217,10.51,25.388,10.51c9.199,0,18.399-3.493,25.387-10.51c14.033-14.033,14.033-36.771,0-50.774L356.781,305.982z"></path>
+              </svg></a>
+            <div class="top-menu__user">
+              <div class="user">
+                <div class="user__foto"><img class="user__img" v-bind:src="user.photoSmall" alt="имя пользователя"></div>
+                <div class="user__content"> 
+                  <div class="user__name">{{user.firstName}} {{user.lastName}}</div>
+                  <div class="user__data"><span class="user__sign">На счету: </span><span class="user__acc">{{info.summ}}</span></div>
+                </div>
+              </div>
+            </div>
+            <ul class="top-menu__list" v-on:click="onSelectMenu">
+              <li class="top-menu__item" data-type="rules"><a class="top-menu__link" href="/" :class="{active: rulesShow}">Правила</a></li>
+              <li class="top-menu__item" data-type="invite"><a class="top-menu__link" href="/" :class="{active: inviteShow}">Пригласить<br> друзей</a></li>
+              <li class="top-menu__item" data-type="start"><a class="top-menu__link" href="/" :class="{active: startShow}">Образование</a></li>
+              <li class="top-menu__item" data-type="list"><a class="top-menu__link" href="/" :class="{active: listShow}">Рейтинг участников</a></li>
+              <li class="top-menu__item" data-type="getCard"><a class="top-menu__link" href="/" :class="{active: getCardShow}">Детская карта Райффайзенбанка</a></li>
+            </ul>
+            <div class="top-menu__main-btn">
+              <button class="main-btn" type="button">Оформить карту</button>
+            </div>
+            <div class="top-menu__logo">
+              <div class="logo">
+                <svg class="logo__svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+                  <polygon points="0,0 0,200 200,0"></polygon>
+                </svg><a class="logo__title" href="/"><img class="logo__img" src="assets/img/raff.png" title="Райффайзен Банк"></a>
+              </div>
+            </div>
+          </div>
+          <div class="header__btn">
+            <button class="main-btn" type="button">Оформить карту</button>
+          </div>
+          <div class="user">
+            <div class="user__foto"><img class="user__img" v-bind:src="user.photoSmall" alt="имя пользователя"></div>
+            <div class="user__content"> 
+              <div class="user__name">{{user.firstName}} {{user.lastName}}</div>
+              <div class="user__data"><span class="user__sign">На счету: </span><span class="user__acc">{{info.summ}}</span></div>
+            </div>
+          </div>
+          <div class="sign"><a class="sign__link" href="/">
+              <svg class="sign__diary">
+                <use xlink:href="assets/img/sprite/sprite.svg#logo"></use>
+              </svg></a></div>
+        </header>
+        <start-component :is-shown="startShow" :info-data="info" :article-list="articleList"></start-component>
+        <article-component :is-shown="articleShow" :article="article" :info-data="info" :user-data="user"></article-component>
+        <get-card-component :is-shown="getCardShow"></get-card-component>
+        <list-component :is-shown="listShow" :list-data="userList" :user-data="user"></list-component>
+        <invite-component :is-shown="inviteShow" :list-data="userList" :user-data="user"></invite-component>
+        <game-component :is-shown="gameShow" :info-data="info" :show-sc="showScenario" :user-data="user"></game-component>
+        <div class="footer">
+          <div class="container">
+            <div class="footer__comment"></div>
+            <div class="footer__text">ПОД ДЕТСКОЙ КАРТОЙ ПОНИМАЕТСЯ КАРТА  РАЙФФАЙЗЕН KIDS/TEENS (ДЕТИ/ПОДРОСТКИ) MASTERCARD STANDARD ДЛЯ ДЕТЕЙ В ВОЗРАСТЕ ОТ 6 ДО 17 ЛЕТ (ВКЛЮЧИТЕЛЬНО). ДЕТЯМ С 6 ДО 14 ЛЕТ КАРТА МОЖЕТ БЫТЬ ОФОРМЛЕНА ТОЛЬКО КАК ДОПОЛНИТЕЛЬНАЯ КАРТА К СЧЕТУ РОДИТЕЛЯ. ДЕТЯМ С 14 ДО 17 ЛЕТ (ВКЛЮЧИТЕЛЬНО) КАРТА МОЖЕТ БЫТЬ КАК ДОПОЛНИТЕЛЬНОЙ, ТАК И ОСНОВНОЙ К СЧЕТУ РЕБЕНКА ПРИ НАЛИЧИИ СОГЛАСИЯ РОДИТЕЛЯ. АО РАЙФФАЙЗЕНБАНК. </div>
+            <div class="footer__sign">АО «Райффайзенбанк»    </div>
+          </div>
+        </div>
+        <script type="text/x-template" id="start-template">
+          <main class="main" v-show="isShown">    
+            <div class="hero">
+              <div class="hero__title">
+                <h1 class="hero__text">Финансовая грамотность</h1>
+                <div class="hero__sign">
+                  <svg class="hero__svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+                    <polygon points="0,0 0,200 200,0"></polygon>
+                  </svg>
+                  <div class="hero__sign-text">для родителей</div>
+                </div>
+              </div>
+            </div>
+            <div class="main__content">
+              <ul class="cards">
+                <li class="cards__item">
+                  <section class="card" @click="onSelectArticle" data-id="0" :class="{offline: !infoData.articles[0].status}">
+                    <div class="card__shadow"></div>
+                    <div class="card__img-wrap">
+                      <div class="card__sign"> 
+                        <div class="card__sign-text">Конкурс внутри!</div>
+                      </div><img class="card__img" src="assets/img/card.jpg">
+                    </div>
+                    <div class="card__content">
+                      <h2 class="card__title">Зачем детям финансовая грамотность?</h2>
+                      <p class="card__text">Финансовая грамотность формируется в детстве, и чем раньше мы начнём рассказывать ребёнку о ней, тем больше шансов, что он вырастет успешным человеком.</p>
+                    </div>
+                    <footer class="card__footer">
+                      <div class="card__info card__footer-elem">Статья пока не доступна</div>
+                      <div class="card__show card__footer-elem"><span class="card__show-value" v-text="articleList[0].watch"></span>
+                        <svg class="card__show-icon card__icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#eye"></use>
+                        </svg>
+                      </div>
+                      <div class="card__like card__footer-elem"><span class="card__like-value" v-text="articleList[0].likes"></span>
+                        <svg class="card__like-icon card__icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#like"></use>
+                        </svg>
+                      </div>
+                      <div class="card__spend card__footer-elem">Займет 25 минут</div>
+                    </footer>
+                  </section>
+                </li>
+                <li class="cards__item">
+                  <section class="card" @click="onSelectArticle" data-id="1" :class="{offline: !infoData.articles[1].status}">
+                    <div class="card__shadow"></div>
+                    <div class="card__img-wrap">
+                      <div class="card__sign"> 
+                        <div class="card__sign-text">Конкурс внутри!</div>
+                      </div><img class="card__img" src="assets/img/card2.jpg">
+                    </div>
+                    <div class="card__content">
+                      <h2 class="card__title">Как выдавать карманные деньги? 7 советов родителям</h2>
+                      <p class="card__text">Карманные расходы — это первый опыт взаимодействия с деньгами для детей. Без ошибок тут не обходится.</p>
+                    </div>
+                    <footer class="card__footer">
+                      <div class="card__info card__footer-elem">Статья пока не доступна</div>
+                      <div class="card__show card__footer-elem"><span class="card__show-value" v-text="articleList[1].watch"></span>
+                        <svg class="card__show-icon card__icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#eye"></use>
+                        </svg>
+                      </div>
+                      <div class="card__like card__footer-elem"><span class="card__like-value" v-text="articleList[1].likes"></span>
+                        <svg class="card__like-icon card__icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#like"></use>
+                        </svg>
+                      </div>
+                      <div class="card__spend card__footer-elem">Займет 25 минут</div>
+                    </footer>
+                  </section>
+                </li>
+                <li class="cards__item">
+                  <section class="card" @click="onSelectArticle" data-id="2" :class="{offline: !infoData.articles[2].status}">
+                    <div class="card__shadow"></div>
+                    <div class="card__img-wrap">
+                      <div class="card__sign"> 
+                        <div class="card__sign-text">Конкурс внутри!</div>
+                      </div><img class="card__img" src="assets/img/card3.jpg">
+                    </div>
+                    <div class="card__content">
+                      <h2 class="card__title">Как научить ребёнка копить?</h2>
+                      <p class="card__text">Наличие сбережений — признак финансово грамотного человека. Чтобы научиться копить, нужно обладать терпением и иметь вдохновляющую цель. </p>
+                    </div>
+                    <footer class="card__footer">
+                      <div class="card__info card__footer-elem">Статья пока не доступна</div>
+                      <div class="card__show card__footer-elem"><span class="card__show-value" v-text="articleList[2].watch"></span>
+                        <svg class="card__show-icon card__icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#eye"></use>
+                        </svg>
+                      </div>
+                      <div class="card__like card__footer-elem"><span class="card__like-value" v-text="articleList[2].likes"></span>
+                        <svg class="card__like-icon card__icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#like"></use>
+                        </svg>
+                      </div>
+                      <div class="card__spend card__footer-elem">Займет 25 минут</div>
+                    </footer>
+                  </section>
+                </li>
+                <li class="cards__item">
+                  <section class="card" @click="onSelectArticle" data-id="3" :class="{offline: !infoData.articles[3].status}">
+                    <div class="card__shadow"></div>
+                    <div class="card__img-wrap">
+                      <div class="card__sign"> 
+                        <div class="card__sign-text">Конкурс внутри!</div>
+                      </div><img class="card__img" src="assets/img/card4.jpg">
+                    </div>
+                    <div class="card__content">
+                      <h2 class="card__title">Что такое правильное отношение к деньгам?</h2>
+                      <p class="card__text">Финансовая грамотность — это не столько навык копить деньги, сколько умение разумно их тратить, что часто для ребенка оказывается более сложной задачей. </p>
+                    </div>
+                    <footer class="card__footer">
+                      <div class="card__info card__footer-elem">Статья пока не доступна</div>
+                      <div class="card__show card__footer-elem"><span class="card__show-value" v-text="articleList[3].watch"></span>
+                        <svg class="card__show-icon card__icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#eye"></use>
+                        </svg>
+                      </div>
+                      <div class="card__like card__footer-elem"><span class="card__like-value" v-text="articleList[3].likes"></span>
+                        <svg class="card__like-icon card__icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#like"></use>
+                        </svg>
+                      </div>
+                      <div class="card__spend card__footer-elem">Займет 25 минут                          </div>
+                    </footer>
+                  </section>
+                </li>
+                <li class="cards__item"><a class="promo" href="/"><img class="promo__img" src="assets/img/promo.jpg"></a></li>
+              </ul>
+            </div>
+          </main>
+        </script>
+        <script type="text/x-template" id="article-template">
+          <main class="main main_article" v-show="isShown">    
+            <div class="hero">
+              <div class="container">
+                <div class="hero__title">
+                  <h1 class="hero__text">Финансовая грамотность</h1>
+                  <div class="hero__sign">
+                    <svg class="hero__svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+                      <polygon points="0,0 0,200 200,0"></polygon>
+                    </svg>
+                    <div class="hero__sign-text">для родителей</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="main__content">
+              <div class="container">
+                <div class="section article"><a class="article__btn" href="/" v-on:click="goBack">Ко всем статьям
+                    <svg>
+                      <use xlink:href="assets/img/sprite/sprite.svg#arrowl"></use>
+                    </svg></a>
+                  <div class="art" v-show="article.id == 0">
+                    <h1 class="article__title">Зачем детям финансовая грамотность? И как начать о ней говорить.</h1>
+                    <div class="article__time">13.08.17</div>
+                    <div class="article__content">
+                      <p class="article__text">
+                        Деньгами умеют распоряжаться не все взрослые, что уж говорить о детях. 
+                        У каждого найдутся знакомые, которые делают крупную покупку, а потом 
+                        просят в долг, тратят всю зарплату в первую неделю, годами 
+                        безрезультатно копят на новое приобретение. При этом, умение 
+                        планировать финансы не связано с уровнем дохода: есть множество семей, 
+                        которые при очень скромном достатке живут благополучно. Финансовая 
+                        грамотность формируется в детстве, и чем раньше мы начнём рассказывать 
+                        ребёнку о ней, тем больше шансов, что он вырастет успешным человеком.
+                      </p>
+                      <h2 class="article__subtitle">Когда начать?</h2>
+                      <p class="article__text">
+                        Начните прямо сейчас, независимо от того, сколько лет ребёнку. Финансовая 
+                        грамотность — навык, который оттачивается на собственном опыте, неважно, идёт 
+                        ли речь о карманных расходах на сладости или накоплениях на модные кроссовки. 
+                        В последующих статьях мы будем подробно говорить о том, как выдавать деньги 
+                        на карманные расходы, как научить ребёнка копить и как привить с детства 
+                        здоровое отношение к деньгам.
+                      </p>
+                      <h2 class="article__subtitle">Как начать?</h2>
+                      <p class="article__text">
+                        Начните с малого: проговаривайте вслух, что вы собираетесь купить, за какую 
+                        сумму и почему. Сопоставляя товары между собой, вы научите сравнивать и ребенка. 
+                        Каждый раз, когда вы расплачиваетесь наличными, дети видят, что деньги меняют на 
+                        товары или услуги, и что первые при этом уменьшаются в количестве. 
+                        При использовании карт такого эффекта можно добиться, если вам приходят 
+                        уведомления о текущем балансе. Для детей важно осознать конечность денег, 
+                        столкнуться с определенными ограничениями, но не в виде сухой фразы «денег нет», 
+                        а в форме диалога и поиска альтернатив: «Может, выберешь игрушку подешевле?» или 
+                        «Сейчас мы не можем это купить, но попробуй накопить и прийти за этим позже». 
+                      </p>
+                      <div class="article__img-wrap"><img class="article__img artile__img_one" src="assets//img/rec1.jpg"></div>
+                      <h2 class="article__subtitle">С чего начать?</h2>
+                      <ul class="article__list">
+                        <li class="article__item">
+                           Объясните ребенку, что такое баланс доходов и расходов, и желательно на практике. 
+                          Вручите ему небольшую сумму и поговорите о том, что он хочет купить на нее и 
+                          почему? Знает ли он, сколько потратит и сколько останется? Посчитайте вместе, 
+                          можно даже наглядно изобразить это на бумаге. 
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"> </use>
+                          </svg>
+                        </li>
+                        <li class="article__item">
+                          Если окажется, что желанная покупка стоит больше, чем есть у ребенка, 
+                          самое время рассказать о сбережениях. Детям важно уметь копить: это 
+                          научит их проявлять терпение, когда они сталкиваются с ограничениями,
+                          и достигать целей. А ещё желание новой покупки всегда связано с 
+                          выработкой эндорфинов, которые выбрасываются в кровь, когда мы очень 
+                          ждём чего-то приятного. Подробнее о том, как родители могут это 
+                          использовать, мы поговорим в одной из следующих статей.
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"></use>
+                          </svg>
+                        </li>
+                        <li class="article__item">
+                          Попробуйте организовать процесс накопления в игровой форме: например, нарисуйте 
+                          лесенку, на вершине которой изображена желанная вещь, а у порога лесенки — 
+                          человечек (можно использовать цветной магнит и разместить это на холодильнике). 
+                          Каждая ступенька — определенная сумма, накапливая которую,   человечек поднимается
+                          выше. Если ребенок не удержался и потратил деньги на мелочи, то и его персонаж 
+                          опускается вниз. Такая наглядность важна с учетом быстрой смены желаний и 
+                          приоритетов у детей. 
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"></use>
+                          </svg>
+                        </li>
+                      </ul>
+                      <div class="article__img-wrap"><img class="article__img artile__img_two" src="assets//img/rec2.jpg"></div>
+                      <p class="artice__quote">
+                         Когда мы говорим о финансовой грамотности, то имеем в виду не только 
+                        умение сопоставлять доходы и расходы, но и навык постановки 
+                        долгосрочных целей, определения приоритетов и формирования прогнозов. 
+                        О том, как развивать эти качества у детей, мы будем говорить в течение 
+                        следующих двух месяцев. А пока — конкурс историй для родителей!
+                      </p>
+                    </div>
+                  </div>
+                  <div class="art" v-show="article.id == 1">
+                    <h1 class="article__title">Как выдавать карманные деньги? 7 советов родителям</h1>
+                    <div class="article__time">21.08.2017</div>
+                    <div class="article__content">
+                      <p class="article__text">Карманные расходы — это первый опыт взаимодействия с деньгами для детей. Без ошибок тут не обходится. Но лучше учиться на ошибках в детстве, располагая небольшой суммой, а во взрослой жизни — пользоваться накопленным опытом. Вот несколько советов для родителей по выдаче карманных денег и развитию финансовой грамотности у школьников.</p>
+                      <h2 class="article__subtitle">Карманные деньги можно и нужно выдавать.</h2>
+                      <p class="article__text">И не стоит с этим тянуть до подросткового возраста. Чем раньше ребёнок получит собственные деньги, тем быстрее осознает, как они работают и как потратить их с пользой. Приурочить выдачу собственных карманных денег можно к началу учебы в школе, когда дети начинают пользоваться транспортом и питаться в школьной столовой.</p>
+                      <h2 class="article__subtitle">Договоритесь о сумме заранее.</h2>
+                      <p class="article__text">Чтобы ребёнок усвоил, что деньги (в том числе, карманные) — исчерпаемый ресурс, их сумма должна быть фиксированной, а выдача, желательно, — регулярной. Посчитайте, сколько ему нужно на проезд, обед в школе и другие ежедневные потребности, заложите небольшую сумму на непредвиденные расходы. Определитесь с периодичностью: раз в 1-2 дня, раз в неделю, раз в месяц. Сроки зависят от возраста ребенка: младшим школьникам сложно планировать бюджет в долгосрочной перспективе, а вот старшим период выдачи можно постепенно увеличивать. </p>
+                      <div class="article__img-wrap"><img class="article__img artile__img_one" src="assets//img/rec1.jpg"></div>
+                      <h2 class="article__subtitle">Не платите за помощь по дому и не лишайте денег в наказание.</h2>
+                      <p class="article__text">Помощь по дому – добровольное проявление заботы. Если ребёнок будет думать, что её можно монетизировать, в какой-то момент он просто перестанет помогать бесплатно. Смысл карманных денег в умении ими распоряжаться, а не добиваться. А лишение денег в наказание даст понять ребенку, что это не его собственность и он за них не отвечает. Как следствие — бездумные траты. Ведь без регулярного притока средств планировать расходы нет смысла.    </p>
+                      <h2 class="article__subtitle">Заведите карту для накоплений и контроля расходов  </h2>
+                      <p class="article__text">Если хотите знать, сколько, где и на что ребёнок потратил. Вам будут приходить SMS-уведомления о транзакциях по детской карте. Её же можно использовать и для накоплений: ребёнку можно установить дневной лимит, а он уже пусть решает, потратить всё или накопить. Это удобно, если школьник планирует крупную покупку в будущем. О детской карте Райффайзен Банка и её преимуществах можно узнать здесь.</p>
+                      <h2 class="article__subtitle">Установите мобильное приложение, которое поможет копить.</h2>
+                      <p class="article__text">
+                         Современным школьникам проще и интереснее осваивать новое с помощью гаджетов. Существуют мобильные приложения, которые позволяют детям самостоятельно контролировать свои траты, отслеживать расходы по карте и планировать бюджет. Приложение <span class="article__label">«Райффайзен-Start»</span>станет отличным проводников в мир личных финансов для ребёнка. </p>
+                      <div class="article__img-wrap"><img class="article__img artile__img_two" src="assets//img/rec2.jpg"></div>
+                      <h2 class="article__subtitle">Расскажите об оптимизации расходов</h2>
+                      <p class="article__text">То есть о том, что можно снижать расходы без ущерба для комфорта. Обсудите с ребенком его траты и вместе поищите альтернативы. Например, у него подключен мобильный тариф с пакетом бесплатных SMS, а он их никогда не отправляет и общается в интернете. Или каждый раз по дороге на тренировку он покупает воду в магазине, хотя можно взять из дома в бутылке и сэкономить серьезную сумму в месяц. По отдельности эти траты кажутся мелочами, но в совокупности могут сберечь значительную часть бюджета. </p>
+                      <h2 class="article__subtitle">Помогайте с крупными покупками.</h2>
+                      <p class="article__text">Если вы знаете, что своими силами ребёнок не справится, мотивируйте его своей помощью. Заранее договоритесь, что как только он накопит треть или половину необходимой суммы, вы добавите ему оставшуюся часть. Даже такая частично самостоятельная покупка будет полезным опытом для ребенка и доставит ему много удовольствия. </p>
+                      <p class="artice__quote">Будьте примером. Дети в первую очередь смотрят на наши действия, а не на слова. Если мы говорим им одно, а делаем другое, они мгновенно это заметят.</p>
+                    </div>
+                  </div>
+                  <div class="art" v-show="article.id == 2">
+                    <h1 class="article__title">Как научить ребёнка копить?</h1>
+                    <div class="article__time">29.08.2017</div>
+                    <div class="article__content">
+                      <p class="article__text">Наличие сбережений — признак финансово грамотного человека. Чтобы научиться копить, нужно обладать терпением и иметь вдохновляющую цель. У маленького ребёнка таких способностей ещё нет, но умение копить начинается с малого и хорошо усваивается в игровой форме. Вот несколько рекомендаций для родителей, чей ребёнок решил накопить на первую самостоятельную покупку.</p>
+                      <h2 class="article__subtitle">Расскажите про семейный бюджет, как он формируется и на что тратится.</h2>
+                      <p class="article__text">Чтобы ребёнок понимал, что такое семейный бюджет, расскажите ему об этом в доступной форме. Если он ещё маленький, пусть нарисует семью, а вы напишите, сколько денег приносит каждый из членов и почему: например, папа получает зарплату, бабушка — пенсию, а старший брат не работает, но он учится, и это тоже важно.   Изобразите основные статьи семейных расходов: дом, одежда, еда, питомцы, сладости и развлечения. Каждую сферу можно обозначить отдельным цветом и, когда ребенок попросит дорогую игрушку, можно наглядно продемонстрировать ему, что сейчас в приоритете более важные семейные покупки, но он может попробовать накопить.  </p>
+                      <h2 class="article__subtitle">Заведите список желаний. Не покупайте вещь по первому требованию ребенка.</h2>
+                      <p class="article__text">Откладывать покупку — очень полезное упражнение. Во-первых, это увеличит степень удовольствия, которое ребёнок получит от долгожданной  вещи, а во-вторых, научит его ждать. А ещё он поймет, что не все желания сбываются по щелчку пальцев и иногда для получения желаемого нужно проявить терпение. Родители же, откладывая покупку, могут увидеть, насколько сильна мотивация ребёнка: часто бывает так, что сегодня он просит дорогой конструктор, а завтра уже забыл о нём. Ведение списка желаний — хороший способ структурировать детские просьбы и научить ребёнка расставлять приоритеты.</p>
+                      <div class="article__img-wrap"><img class="article__img artile__img_one" src="assets//img/rec1.jpg"></div>
+                      <h2 class="article__subtitle">Выдавайте на карманные расходы.</h2>
+                      <p class="article__text">Чтобы ребенку было что копить, ему нужны фиксированные карманные расходы. С собственными деньгами детям, как правило, труднее расставаться, чем с родительскими, потому что количество первых ограничено.   </p>
+                      <h2 class="article__subtitle">Заведите карту для накоплений.</h2>
+                      <p class="article__text">На карте удобно хранить большие суммы для крупной покупки. А ещё с неё сложнее снять деньги в случае, если ребёнка накрыл сиюминутный порыв приобрести что-то и распрощаться с мечтой о большой покупке. Банки предлагают удобные карты, которые позволяют родителям следить за транзакциями и отправляют SMS-уведомления о пополнениях и тратах на родительский номер. </p>
+                      <div class="article__img-wrap"><img class="article__img artile__img_two" src="assets//img/rec2.jpg"></div>
+                      <h2 class="article__subtitle">Не платите за хорошие оценки.</h2>
+                      <p class="article__text">Ребенок ходит в школу для знаний, а не для денег. Подмена внутренней мотивации денежным поощрением может сыграть с родителями злую шутку: в какой-то момент ребенок начнет торговаться или вовсе откажется учиться без финансового поощрения. Если хочется сделать школьнику приятно, пусть это будет связано со значительным событием, вроде математической олимпиады или спортивными соревнованиями.</p>
+                      <h2 class="article__subtitle">Превратите накопление в игру.</h2>
+                      <p class="article__text">Нарисуйте гору, лестницу или гоночную трассу, по которой двигается персонаж, по мере того как ребенок накапливает определенную сумму. Это хороший способ мотивировать детей: если человечек уже так близок к заветной цели, как можно потратить все деньги на сладости? Если ребенку тяжело даются накопления, придумайте систему бонусов. Например, после достижения определенной планки сумма может удвоиться за счет родителей. </p>
+                    </div>
+                  </div>
+                  <div class="art" v-show="article.id == 3">
+                    <h1 class="article__title">Что такое правильное отношение к деньгам? И как привить его ребёнку</h1>
+                    <div class="article__time">7.09.2017</div>
+                    <div class="article__content"> 
+                      <p class="article__text">Финансовая грамотность — это не столько навык копить деньги, сколько умение разумно их тратить, что часто для ребенка оказывается более сложной задачей. Реклама и сиюминутные порывы мешают детям достигать долгосрочных финансовых целей и отделять реальные потребности от того, без чего можно обойтись. Вот что могут сделать родители, чтобы привить детям грамотное отношение к деньгам.</p>
+                      <h2 class="article__subtitle">Станьте для ребенка примером грамотного отношения к деньгам.</h2>
+                      <p class="article__text">Главное — не подавать плохой пример. Как часто ребёнок становится свидетелем спонтанной покупки? Насколько эффективно расходуется семейный бюджет, берете ли вы кредиты? Как формируются ваши сбережения и на что они уходят? Дети учатся у родителей и до определенного возраста интуитивно перенимают всё, не подвергая анализу. </p>
+                      <div class="article__img-wrap"><img class="article__img artile__img_one" src="assets//img/rec1.jpg"></div>
+                      <h2 class="article__subtitle">Отличайте удовольствие от необходимости.</h2>
+                      <p class="article__text">Сопоставлять реальные потребности с навязанными — полезное умение, но им обладают даже не все взрослые. Очередная пара дорогих кроссовок как дань моде не является жизненной необходимостью, а вот сходить к стоматологу или оплатить репетитора нужно прямо сейчас. Деньги имеют свойство кончаться, поэтому в первую очередь их необходимо распределять на действительно важные вещи.</p>
+                      <h2 class="article__subtitle">Научитесь иногда говорить «нет».</h2>
+                      <p class="article__text">Непросто отказать ребёнку в покупке новой вещи, тем более, если в семье на это есть средства.  Но попробуйте спросить: почему ему нужна именно эта игрушка, нет ли альтернатив? Это точно его собственное желание или он просит её, потому что у кого-то из одноклассников такая же, и ему хочется подражать? Проблема многих родителей — неумение сказать «нет». Но если мы будем постоянно соглашаться, это может заметно ударить по кошельку. Не бойтесь сказать, что на это сейчас нет денег, иначе ребенок станет думать, что ваши возможности безграничны.</p>
+                      <h2 class="article__subtitle">Научите ребенка правильному отношению к рекламе.</h2>
+                      <p class="article__text">Расскажите ребенку, как работает реклама: что не всегда рекламируемая конфета — вкусная, а игрушка — интересная. Маленьких детей в рекламе чаще привлекают популярными героями мультфильмов, а подростков — убеждением, что товар поможет им стать взрослее, сильнее и завести много друзей. Детям полезно иметь представление о манипулятивных схемах, это поможет им быть более избирательными.</p>
+                      <div class="article__img-wrap"><img class="article__img artile__img_two" src="assets//img/rec2.jpg"></div>
+                      <h2 class="article__subtitle">Дайте ребенку шанс самостоятельно решить финансовые вопросы. </h2>
+                      <p class="article__text">Если ребенок занял деньги у ровесников, не спешите за него расплачиваться. Пусть он попробует рассчитаться сам, а вы займите позицию наблюдателя. Ребенку нужно будет отказаться от  некоторых удовольствий, и это поможет ему осознать дискомфорт своего положения и в будущем относиться к займам осторожнее. Опыт самостоятельного решения таких проблем пригодится ребёнку в будущем. </p>
+                    </div>
+                  </div>
+                  <div class="article__socials socials" v-show="isShown"> 
+                    <div class="socials__left">
+                      <div class="socials__show"><span class="socials__show-value" v-text="article.watch"></span>
+                        <svg class="socials__show-icon">
+                          <use xlink:href="assets/img/sprite/sprite.svg#eye"></use>
+                        </svg>
+                      </div>
+                      <div class="socials__like" @click="onLiked"><span class="socials__like-value" v-text="article.likes"></span>
+                        <svg class="socials__like-icon" :class="{active: infoData.articles[article.id].like}">
+                          <use xlink:href="assets/img/sprite/sprite.svg#like"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="socials__right">
+                      <ul class="socials__list">
+                        <li class="socials__item"><a class="socials__link socials__link_vk" href="/">
+                            <svg class="socials__icon">
+                              <use xlink:href="assets/img/sprite/sprite.svg#vk"></use>
+                            </svg></a></li>
+                        <li class="socials__item"><a class="socials__link socials__link_vk" href="/">
+                            <svg class="socials__icon">
+                              <use xlink:href="assets/img/sprite/sprite.svg#fb"></use>
+                            </svg></a></li>
+                        <li class="socials__item"><a class="socials__link socials__link_vk" href="/">
+                            <svg class="socials__icon">
+                              <use xlink:href="assets/img/sprite/sprite.svg#tw"></use>
+                            </svg></a></li>
+                        <li class="socials__item"><a class="socials__link socials__link_vk" href="/">
+                            <svg class="socials__icon">
+                              <use xlink:href="assets/img/sprite/sprite.svg#ok">                 </use>
+                            </svg></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <form class="article__form" v-show="!infoData.articles[article.id].commented &amp;&amp; isShown" @submit="sendReview">
+                    <div class="article__form-item"> 
+                      <div class="artice__form-title">КОНКУРС! Поделитесь своей историей!</div>
+                      <div class="artice__form-text"> Вспомните, когда вы впервые почувствовали себя финансово независимым: может, это была стипендия или первая зарплата? На что вы потратили эти деньги?<span>Присылайте рассказ о первом опыте покупки на собственные деньги!</span></div>
+                    </div>
+                    <div class="article__form-item"> 
+                      <textarea class="article__form-textarea" name="articletext"></textarea>
+                    </div>
+                    <div class="article__form-item"> 
+                      <button class="article__form-btn" type="submit">Отправить</button>
+                    </div>
+                  </form>
+                  <div class="article__story" v-show="infoData.articles[article.id].commented &amp;&amp; isShown">Благодарим за ваш рассказ! Ниже вы можете ознакомиться с историями других участников.   </div>
+                  <div class="comments" v-show="infoData.articles[article.id].commented &amp;&amp; isShown">
+                    <ul class="comments__list">
+                      <li class="comments__item" v-for="article, index in article.comments">
+                        <div class="comment" v-bind:data-id="index">
+                          <div class="comment__foto"><img class="comment__img" :src="article.photo" title="user"></div>
+                          <div class="comment__content">
+                            <h3 class="comment__title">{{article.name}}</h3>
+                            <p class="comment__text">{{article.text}}</p>
+                          </div>
+                          <div class="comment__like" @click="onCommentLiked"> <span class="comment__like-value">{{article.likes}}</span>
+                            <svg class="comment__like-icon">
+                              <use xlink:href="assets/img/sprite/sprite.svg#like">      </use>
+                            </svg>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </script>
+        <script type="text/x-template" id="getcard-template">
+          <main class="main main_getcard" v-show="isShown">    
+            <div class="hero">
+              <div class="container">
+                <div class="hero__title">
+                  <h1 class="hero__text">Детская карта Райффайзенбанка</h1>
+                  <div class="hero__sign">
+                    <svg class="hero__svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+                      <polygon points="0,0 0,200 200,0"></polygon>
+                    </svg>
+                    <div class="hero__sign-text">от 6 до 17 лет</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="main__content">
+              <div class="promocard">
+                <div class="promocard__top">
+                  <svg class="promocard__top-svg" viewBox="0 0 400 50" preserveAspectRatio="none">
+                    <polygon points="0,0 0,400 400,0"></polygon>
+                  </svg>
+                  <div class="container">
+                    <div class="promocard__title">Чтобы попасть во взрослую жизнь, ребенку нужна карта!</div>
+                    <div class="promocard__adv">
+                      <div class="promocard__adv-wrap"><img class="promoacrd__adv-img" src="assets/img/dog.png" title="card promo"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="promocard__content">
+                  <div class="container">
+                    <div class="promocard__inner-text">
+                      <div class="promocard__text">С детской картой</div>
+                      <h2 class="promocard__subtitle">Вы сможете:</h2>
+                      <ul class="promocard__list">
+                        <li class="promocard__item"> <span>Контролировать расходы ребёнка через SMS-оповещения  </span>
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"></use>
+                          </svg>
+                        </li>
+                        <li class="promocard__item"> <span>Устанавливать ежедневные лимиты на снятие наличных и траты</span>
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"></use>
+                          </svg>
+                        </li>
+                        <li class="promocard__item"> <span>Быть уверенным в безопасности</span>
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"></use>
+                          </svg>
+                        </li>
+                      </ul>
+                      <h2 class="promocard__subtitle">Ваш ребенок сможет:</h2>
+                      <ul class="promocard__list">
+                        <li class="promocard__item"> <span>Получать подарки от Банка и cashback</span><span class="number">1</span><span>&nbsp;5% на все покупки</span><span class="number">2 </span>
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"></use>
+                          </svg>
+                        </li>
+                        <li class="promocard__item"> <span>Бесплатно пополнять карту с карт любых банков</span>
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"></use>
+                          </svg>
+                        </li>
+                        <li class="promocard__item">Расплачиваться картой самостоятельно
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr"></use>
+                          </svg>
+                        </li>
+                        <li class="promocard__item"> <span>Обучаться финансовой грамотности, анализируя свои траты</span>
+                          <svg>
+                            <use xlink:href="assets/img/sprite/sprite.svg#arrowr">           </use>
+                          </svg>
+                        </li>
+                      </ul><a class="promocard__btn" href="/">Оформить карту</a><a class="promocard__link" href="/">Подробнее</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="promocard__mobile mobile">
+                  <div class="container">
+                    <h2 class="mobile__title">А ещё специально для юных держателей карт разработано мобильное приложение «Райффайзен-Start<span class="number">3</span><span>», которое:</span></h2>
+                    <div class="mobile__content">
+                      <div class="mobile__item">Поможет найти ответы на вопросы, связанные с личными финансами
+                        <svg class="mobile__svg mobile__svg_quest">
+                          <use xlink:href="assets/img/sprite/sprite.svg#qwestions"></use>
+                        </svg>
+                      </div>
+                      <div class="mobile__item">Предоставляет возможность делать первые накопления и планировать будущие приобретения
+                        <svg class="mobile__svg mobile__svg_pig">
+                          <use xlink:href="assets/img/sprite/sprite.svg#pig"></use>
+                        </svg>
+                      </div>
+                      <div class="mobile__item">Дает информацию об остатке на счете 
+                        <svg class="mobile__svg mobile__svg_wallet">
+                          <use xlink:href="assets/img/sprite/sprite.svg#wallet">   </use>
+                        </svg>
+                      </div>
+                      <div class="mobile__item">Позволяет отслеживать расходы<span class="number">4</span>
+                        <svg class="mobile__svg mpbile__svg_ccard">
+                          <use xlink:href="assets/img/sprite/sprite.svg#ccard"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="appslider-wrap">         
+                  <ul class="appslider owl-carousel owl-theme" id="appslider">
+                    <li class="appslider__item"><img class="appslider__img appslider__img_01" src="assets/img/01.jpg"></li>
+                    <li class="appslider__item"><img class="appslider__img appslider__img_02" src="assets/img/02.jpg"></li>
+                    <li class="appslider__item"><img class="appslider__img appslider__img_03" src="assets/img/03.jpg"></li>
+                    <li class="appslider__item"><img class="appslider__img appslider__img_04" src="assets/img/04.jpg"></li>
+                  </ul>
+                  <div class="applinks"><a class="applinks__btn" href="/">Оформить карту</a>
+                    <div class="applinks__items"><a class="applink__link applink__link_i" href="/"></a><a class="applink__link applink__link_a" href="/">   </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ul class="footer__comments">
+              <div class="container">
+                <li class="footer__comments-elem">
+                  <div class="footer__comments-sign-number">1 -</div>
+                  <div class="footer__coments-text">Возврат средств</div>
+                </li>
+                <li class="footer__comments-elem">
+                  <div class="footer__comments-sign-number">2 -</div>
+                  <div class="footer__coments-text">Для владельцев карты старше 14 лет. Ежемесячная сумма выплат не превышает 200 рублей</div>
+                </li>
+                <li class="footer__comments-elem">
+                  <div class="footer__comments-sign-number">3 -</div>
+                  <div class="footer__coments-text">Старт</div>
+                </li>
+                <li class="footer__comments-elem">
+                  <div class="footer__comments-sign-number">4 -     </div>
+                  <div class="footer__coments-text">Категория 0+  </div>
+                </li>
+              </div>
+            </ul>
+          </main>
+        </script>
+        <script type="text/x-template" id="list-template" lang="pug">
+          <main class="main main_list" v-show="isShown">    
+            <div class="main__content">
+              <div class="container">
+                <div class="section main-list"><a class="mainlist__btn" href="/" v-on:click="goPlay" v-if="userData.roles[0] !== 'EduParent'">К игре
+                    <svg>
+                      <use xlink:href="assets/img/sprite/sprite.svg#arrowl"></use>
+                    </svg></a>
+                  <div class="main-list__inner">
+                    <div class="main-list__header">
+                      <div class="score score_title">
+                        <div class="score__number">Место</div>
+                        <div class="score__name">Участник</div>
+                        <div class="score__value">Баллы </div>
+                      </div>
+                    </div>
+                    <ul class="main-list__list">
+                      <li class="main-list__item" v-for="(item, index) in listData">
+                        <div class="score">
+                          <div class="score__number" v-text="index + 1"></div>
+                          <div class="score__info">
+                            <div class="score__foto"><img class="score__img" :src="item.photo" title="user"></div>
+                            <div class="score__data"> 
+                              <div class="score__name" v-text="item.name"></div>
+                              <div class="score__city" v-if="item.city" v-text="item.city"></div>
+                            </div>
+                          </div>
+                          <div class="score__value" v-text="item.summ"></div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </script>
+        <script type="text/x-template" id="game-template">
+          <main class="main main_game" v-show="isShown">    
+            <div class="main__content"></div>
+            <div class="gamedock">
+              <div class="gamedock__list">
+                <div class="gamedock__item gamedock__info" v-on:click="onPanelShow">
+                  <div class="gamedock__triangle"></div>
+                  <div class="gamedock__title">На карте</div>
+                  <div class="gamedock__money" v-text="infoData.summ"></div>
+                </div>
+                <div class="gamedock__item gamedock__mood">
+                  <div class="gamedock__title">Настроение</div>
+                  <div class="gamedock__value">
+                    <div class="gamedock__val"></div>
+                  </div>
+                </div>
+                <div class="gamedock__item gamedock__health">
+                  <div class="gamedock__title">Здоровье</div>
+                  <div class="gamedock__value">
+                    <div class="gamedock__val"></div>
+                  </div>
+                </div>
+                <div class="gamedock__item gamedock__food">
+                  <div class="gamedock__title">Еда</div>
+                  <div class="gamedock__value">
+                    <div class="gamedock__val"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="gamepanel">
+              <div class="gamepanel__close" v-on:click="onPanelClose"></div>
+              <div class="gamepanel__left">
+                <div class="gamepanel__card"></div>
+                <div class="gamepanel__data">
+                  <div class="gamepanel__sum">Баланс: <span v-text="infoData.summ"></span></div>
+                  <div class="gamepanel__data">Ближайшая з/п<span v-text="infoData.nextPayment"></span></div>
+                </div>
+              </div>
+              <div class="gamepanel__right">
+                <div class="gamepanel__wrapper">
+                  <div class="gamepanel__title">История операций</div>
+                  <div class="gamepanel__date"> Сегодня</div>
+                  <ul class="gamepanel__list">
+                    <li class="gamepanel__item gamepanel_food">
+                      <div class="gamepanel__item-title">Поход в ресторан с друзьями          </div>
+                      <div class="gamepanel__item-summ">-1500</div>
+                    </li>
+                  </ul>
+                  <div class="gamepanel__date">15.07.2017</div>
+                  <ul class="gamepanel__list">
+                    <li class="gamepanel__item gamepanel_health">
+                      <div class="gamepanel__item-title">Поход к врачу          </div>
+                      <div class="gamepanel__item-summ">-1500</div>
+                    </li>
+                    <li class="gamepanel__item gamepanel_smile">
+                      <div class="gamepanel__item-title">Новые кроссовки         </div>
+                      <div class="gamepanel__item-summ">-1000</div>
+                    </li>
+                    <li class="gamepanel__item gamepanel_health">
+                      <div class="gamepanel__item-title">Поход к врачу          </div>
+                      <div class="gamepanel__item-summ">-1500</div>
+                    </li>
+                    <li class="gamepanel__item gamepanel_smile">
+                      <div class="gamepanel__item-title">Новые кроссовки         </div>
+                      <div class="gamepanel__item-summ">-1000        </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="human"> 
+              <div class="talk"><span>ПРИВЕТ!</span></div>
+            </div>
+          </main>
+        </script>
+        <script type="text/x-template" id="invite-template" lang="pug">
+          <main class="main invite_list" v-show="isShown">    
+            <div class="main__content invite-list">
+              <div class="container">
+                <div class="section main-list">
+                  <div class="main-list__inner">
+                    <div class="main-list__header">
+                      <div class="score score_title">
+                        <div class="score__number">Место</div>
+                        <div class="score__name">Участник</div>
+                        <div class="score__value"> </div>
+                      </div>
+                    </div>
+                    <ul class="main-list__list">
+                      <li class="main-list__item" v-for="(item, index) in listData">
+                        <div class="score">
+                          <div class="score__number invite__number" v-text="index + 1"></div>
+                          <div class="score__info">
+                            <div class="score__foto"><img class="score__img" :src="item.photo" title="user"></div>
+                            <div class="score__data"> 
+                              <div class="score__name" v-text="item.name"></div>
+                              <div class="score__city" v-if="item.city" v-text="item.city"></div>
+                            </div>
+                          </div>
+                          <div class="score__value">
+                            <div class="button invite-btn" @click="onInvite">Пригласить</div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </script>
+        <div class="arrow-up" id="back-top"><a class="arrow-up__link" href="/" v-on:click="onBackTop">Наверх
+            <svg>
+              <use xlink:href="assets/img/sprite/sprite.svg#arrowu"></use>
+            </svg></a></div>
+      </div>
+      <div id="modal" v-show="!gameShow">
+        <div class="modal">
+          <div class="modal__title"></div>
+          <div class="modal__content"></div>
+          <div class="modal__btn modal__btn_one"></div>
+          <div class="modal__btn modal__btn_two"></div><a class="modal__close" href="#close" rel="modal:close">
+            <svg class="close__icon" viewBox="0 0 21.9 21.9" enable-background="new 0 0 21.9 21.9">
+              <path d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z">  </path>
+            </svg></a>
+        </div>
+      </div>
+      <div id="modal2">
+        <div class="modal">
+          <div class="modal__title"></div>
+          <div class="modal__content">  </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
