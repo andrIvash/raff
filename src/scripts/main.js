@@ -341,45 +341,49 @@ const _vm = new Vue({
       this.info.lastvisit = Date.now();
       console.log('last days ----', lastDays);
 
-      if (lastDays >= 1) {  // прибавляем деньги за возврат
+      // прибавляем деньги за возврат, только раз в день
+      if (lastDays >= 1) {
         this.info.summ = this.info.summ + 25 * lastDays;
-      }
 
-      if (lastDays >= 7) {  // прибавляем зарплату раз в неделю
-        this.info.summ = this.info.summ + 100 * (lastDays % 7).toFixed();
+        // прибавляем зарплату раз в неделю в понедельник
+        if (moment(Date.now()).isoWeekday() == 1) {
+          this.info.summ = this.info.summ + 100;
+        }
       }
-
+      
+      // обновляем список баллов
       const userIndx = this.userList.findIndex(elem => elem.id === this.user.id);
       if (userIndx !== -1) {
-        this.userList[userIndx].summ = this.info.summ; // обновляем список баллов
+        this.userList[userIndx].summ = this.info.summ;
       }
 
-      let weekOn = moment(Date.now()).diff(moment(this.info.firstvisit), 'weeks'); // открываем новую статью
+      // открываем новую статью
+      let weekOn = moment(Date.now()).diff(moment(this.info.firstvisit), 'weeks');
       console.log(weekOn);
       for (let i = 0; i <= weekOn; i++) {
         this.info.articles[i].status = true;
       }
+      // ------------------------  игра  -------------------------- //
+      // let foodLevel = this.info.food - (lastDays % 2 * 50).toFixed(); // уменьшаем еду
+      // this.info.food = foodLevel < 0 ? 0 : this.info.food;
       
-      let foodLevel = this.info.food - (lastDays % 2 * 50).toFixed(); // уменьшаем еду
-      this.info.food = foodLevel < 0 ? 0 : this.info.food;
-      
-      let healthLevel = this.info.health - (lastDays % 4 * 25).toFixed(); // уменьшаем здоровье
-      this.info.food = healthLevel < 0 ? 0 : this.info.food;
+      // let healthLevel = this.info.health - (lastDays % 4 * 25).toFixed(); // уменьшаем здоровье
+      // this.info.food = healthLevel < 0 ? 0 : this.info.food;
 
-      let moodLevel = this.info.mood - (lastDays % 3 * 34).toFixed(); // уменьшаем настроение
-      this.info.food = moodLevel < 0 ? 0 : this.info.food;
+      // let moodLevel = this.info.mood - (lastDays % 3 * 34).toFixed(); // уменьшаем настроение
+      // this.info.food = moodLevel < 0 ? 0 : this.info.food;
 
       
-      this.info.nextPayment = this.getNexDay(2).locale('ru').format('ll'); // когда следующая зарплата
-      console.log(this.getNexDay(1).isSame(moment(Date.now())));
+      // this.info.nextPayment = this.getNexDay(2).locale('ru').format('ll'); // когда следующая зарплата
+      // console.log(this.getNexDay(1).isSame(moment(Date.now())));
       
-      setTimeout(function() {
-        that.showScenario = true;
-      }, 4000);
+      // setTimeout(function() {
+      //   that.showScenario = true;
+      // }, 4000);
       
-      if (lastDays >= 3) {  // прибавляем зарплату раз в неделю
-        this.showScenario = true;
-      }
+      // if (lastDays >= 3) {  // показываем событие
+      //   this.showScenario = true;
+      // }
       
       this.saveAllData();
     },
